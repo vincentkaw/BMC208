@@ -15,13 +15,112 @@
         android:orientation="vertical">
         <include
             layout="@layout/main_toolbar"/>
-        <TextView
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="AddBatch"
-            android:textSize="50sp"
-            android:textStyle="bold"
-            android:gravity="center"/>
+            android:layout_gravity="center"
+            android:background="@color/design_default_color_secondary">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/empty_text_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:ignore="MissingConstraints" />
+            <Spinner
+                android:id="@+id/vaccine_spinner"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:layout_marginTop="5dp"
+                app:layout_constraintTop_toBottomOf="@+id/empty_text_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteY="16dp" />
+
+            <TableLayout
+                android:layout_width="400dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/add_batch_table_layout"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/vaccine_spinner"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:ignore="MissingConstraints"
+                android:background="@color/white"
+                android:visibility="invisible">
+
+                <TableRow>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Vaccine Name"
+                        android:textSize="14sp"
+                        android:padding="10sp"
+                        android:layout_weight="5"
+                        android:textStyle="bold"
+                        android:layout_gravity="center_horizontal"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Manufacturer Name"
+                        android:textSize="14sp"
+                        android:padding="10sp"
+                        android:textStyle="bold"
+                        android:layout_weight="6"
+                        android:layout_gravity="center_horizontal"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:padding="10sp"
+                        android:layout_weight="5"
+                        android:layout_gravity="center_horizontal"/>
+
+                </TableRow>
+                <TableRow>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/vaccine_name_text_view"
+                        android:text="Vaccine Name"
+                        android:textSize="14sp"
+                        android:padding="10sp"
+                        android:layout_weight="5"
+                        android:textStyle="bold"
+                        android:layout_gravity="center_horizontal"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/manufacturer_name_text_view"
+                        android:text="Manufacturer Name"
+                        android:textSize="14sp"
+                        android:padding="10sp"
+                        android:layout_weight="6"
+                        android:textStyle="bold"
+                        android:layout_gravity="center_horizontal"/>
+
+                    <Button
+                        android:id="@+id/add_batch_button"
+                        android:layout_height="wrap_content"
+                        android:layout_width="0dp"
+                        android:layout_weight="5"
+                        android:padding="10sp"
+                        android:text="add batch"
+                        android:textSize="14sp"
+                        android:layout_gravity="center_horizontal"
+
+                        />
+
+                </TableRow>
+            </TableLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     </LinearLayout>
 

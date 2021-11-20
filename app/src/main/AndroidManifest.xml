@@ -22,7 +22,7 @@
             android:name=".PatientViewVaccine"
             android:exported="false" />
         <activity
-            android:name=".Dashboard"
+            android:name=".VaccineID"
             android:exported="false" />
         <activity
             android:name=".AddBatchActivity"

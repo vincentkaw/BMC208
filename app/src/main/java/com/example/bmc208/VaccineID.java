@@ -6,13 +6,13 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.os.Bundle;
 import android.view.View;
 
-public class Dashboard extends AppCompatActivity {
+public class VaccineID extends AppCompatActivity {
     //Initialize variable
     DrawerLayout drawerLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dashboard);
+        setContentView(R.layout.activity_vaccine_id);
 
         //Assign variable
         drawerLayout = findViewById(R.id.drawer_layout);

@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">BMC208</string>
+
+    <string-array name="vaccines">
+        <item>--Choose a vaccine--</item>
+        <item>Pfizer - P000001</item>
+        <item>Sinovac - S000001</item>
+        <item>AstraZeneca - A000001</item>
+    </string-array>
 </resources>
