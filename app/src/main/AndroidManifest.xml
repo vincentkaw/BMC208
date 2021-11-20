@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BMC208">
         <activity
+            android:name=".Dashboard"
+            android:exported="false" />
+        <activity
+            android:name=".AddBatchActivity"
+            android:exported="true" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
