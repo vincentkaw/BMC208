@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    tools:context=".PatientViewVaccine">
+
+    <TextView
+        android:id="@+id/label_select"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select a Vaccine"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toTopOf="@id/constraint_layout_patient_buttons"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="10dp"
+        />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/label_select"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/constraint_layout_patient_buttons"
+        android:layout_marginTop="-60dp">
+
+        <Button
+            android:id="@+id/button_patient_pfizer_vaccine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="50dp"
+            android:text="Pfizer"
+            android:textSize="65sp"
+            app:layout_constraintBottom_toTopOf="@id/button_patient_astra_vaccine"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/constraint_layout_patient_buttons" />
+
+        <Button
+            android:id="@+id/button_patient_astra_vaccine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="50dp"
+            android:text="Astra"
+            android:textSize="65sp"
+            app:layout_constraintBottom_toTopOf="@id/button_patient_sino_vaccine"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/button_patient_pfizer_vaccine" />
+
+        <Button
+
+            android:id="@+id/button_patient_sino_vaccine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sino"
+            android:textSize="65sp"
+            app:layout_constraintBottom_toTopOf="@id/button_patient_astra_vaccine"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/button_patient_astra_vaccine" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

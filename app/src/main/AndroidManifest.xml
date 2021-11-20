@@ -10,6 +10,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BMC208">
         <activity
+            android:name=".StaffViewVaccine"
+            android:exported="false" />
+        <activity
+            android:name=".PatientViewBatch"
+            android:exported="false" />
+        <activity
+            android:name=".PatientViewCenter"
+            android:exported="false" />
+        <activity
+            android:name=".PatientViewVaccine"
+            android:exported="false" />
+        <activity
             android:name=".Dashboard"
             android:exported="false" />
         <activity
