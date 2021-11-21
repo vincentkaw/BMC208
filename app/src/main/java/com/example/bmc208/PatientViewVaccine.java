@@ -16,7 +16,6 @@ public class PatientViewVaccine extends AppCompatActivity {
 
     DrawerLayout drawerLayout;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,7 +82,6 @@ public class PatientViewVaccine extends AppCompatActivity {
         builder.show();
 
     }
-
 
     public static void redirectPatientActivity(Activity activity, Class aClass) {
         Intent intent = new Intent(activity, aClass);
