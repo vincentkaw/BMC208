@@ -4,6 +4,113 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PatientStatus">
+    tools:context=".PatientStatus"
+    android:layout_gravity="center"
+    android:background="@color/cardview_shadow_start_color"
+    >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Vaccination ID"
+        android:id="@+id/label_vaccination_id"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/text_view_vaccination_id"
+        android:textStyle="bold"
+        android:textSize="40sp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="000123"
+        android:id="@+id/text_view_vaccination_id"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/label_vaccination_id"
+        app:layout_constraintBottom_toTopOf="@id/label_status"
+        android:textSize="30sp"
+        android:textColor="@color/teal_700"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Appointment Status"
+        android:id="@+id/label_status"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_view_vaccination_id"
+        app:layout_constraintBottom_toTopOf="@id/text_view_status"
+        android:textStyle="bold"
+        android:textSize="40sp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pending"
+        android:id="@+id/text_view_status"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/label_status"
+        app:layout_constraintBottom_toTopOf="@id/label_appointment_date"
+        android:textSize="30sp"
+        android:textColor="@color/teal_700"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Appointment Date"
+        android:id="@+id/label_appointment_date"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_view_status"
+        app:layout_constraintBottom_toTopOf="@id/text_view_appointment_date"
+        android:textStyle="bold"
+        android:textSize="40sp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2021-12-30"
+        android:id="@+id/text_view_appointment_date"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/label_appointment_date"
+        app:layout_constraintBottom_toTopOf="@id/label_appointment_center"
+        android:textSize="30sp"
+        android:textColor="@color/teal_700"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Appointment Center"
+        android:id="@+id/label_appointment_center"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_view_appointment_date"
+        app:layout_constraintBottom_toTopOf="@id/text_view_appointment_center"
+        android:textStyle="bold"
+        android:textSize="40sp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hospital Subang"
+        android:id="@+id/text_view_appointment_center"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/label_appointment_center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="30sp"
+        android:textColor="@color/teal_700"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
