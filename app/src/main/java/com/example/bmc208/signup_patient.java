@@ -2,6 +2,7 @@ package com.example.bmc208;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 
 public class signup_patient extends AppCompatActivity {
 
+    TextView textViewSignIn;
     EditText username;
     EditText password;
     EditText fullname;
@@ -27,6 +29,15 @@ public class signup_patient extends AppCompatActivity {
         email = findViewById(R.id.enter_email);
         staffid = findViewById(R.id.enter_staffid);
         signin = findViewById(R.id.text_signup);
+
+        textViewSignIn = findViewById(R.id.text_signup);
+
+        textViewSignIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(signup_patient.this, signinPatient.class));
+            }
+        });
     }
 
     public void SignUpButtonClick(View view) {

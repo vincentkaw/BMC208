@@ -10,13 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BMC208">
         <activity
+            android:name=".signinAdministrator"
+            android:exported="true" />
+        <activity
             android:name=".signup_healthcare"
             android:exported="true" />
         <activity
             android:name=".signup"
             android:exported="true" />
         <activity
-            android:name=".signin"
+            android:name=".signinPatient"
             android:exported="true" />
         <activity
             android:name=".signup_patient"
