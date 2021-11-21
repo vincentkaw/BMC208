@@ -13,10 +13,10 @@
             android:name=".signup_healthcare"
             android:exported="true" />
         <activity
-            android:name=".signin_healthcare"
+            android:name=".signup"
             android:exported="true" />
         <activity
-            android:name=".signin_patient"
+            android:name=".signin"
             android:exported="true" />
         <activity
             android:name=".signup_patient"

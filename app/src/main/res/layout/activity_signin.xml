@@ -8,13 +8,13 @@
     android:layout_marginTop="30dp"
     android:background="#C94D618F"
     android:orientation="vertical"
-    tools:context=".signin_patient">
+    tools:context=".signin">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="PCVS"
-        android:textSize="90sp"
+        android:text="VACCESS"
+        android:textSize="60sp"
         android:textAlignment="center"/>
 
     <ImageView
@@ -31,7 +31,7 @@
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
         android:textSize="18sp"
-        android:padding="15dp"
+        android:padding="8dp"
         android:singleLine="true"
         android:hint="Enter username"
         android:inputType="textPersonName"
@@ -47,7 +47,7 @@
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
         android:textSize="18sp"
-        android:padding="15dp"
+        android:padding="8dp"
         android:singleLine="true"
         android:hint="Enter password"
         android:inputType="textPassword"
@@ -64,7 +64,7 @@
         android:layout_marginTop="15dp"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
-        android:padding="12dp"
+        android:padding="8dp"
         android:backgroundTint="@color/black"
         app:cornerRadius="10dp"/>
 
