@@ -1,10 +1,22 @@
 package com.example.bmc208;
 
 public class Patient {
+
+    static String COLLECTION_NAME = "Patient";
+
+    private String patientid;
     private String username;
     private String password;
     private String email;
     private String ic_passport;
+
+    public String getPatientid() {
+        return patientid;
+    }
+
+    public void setPatientid(String patientid) {
+        this.patientid = patientid;
+    }
 
     public String getUsername() {
         return username;
