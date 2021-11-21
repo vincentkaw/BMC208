@@ -34,7 +34,6 @@ public class AddBatchActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
     Spinner vaccineSpinner;
     TextView vaccineName;
-    TextView vaccineID;
     TextView manufacturerName;
     TableLayout addBatchTable;
     Button addBatchButton;
@@ -98,6 +97,8 @@ public class AddBatchActivity extends AppCompatActivity {
         addBatchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
                 showAddBatchDialog();
             }
         });
@@ -114,7 +115,9 @@ public class AddBatchActivity extends AppCompatActivity {
         final EditText batchNoEditText = dialog.findViewById(R.id.batch_no_edit_text);
         final EditText expiryDateEditText = dialog.findViewById(R.id.expiry_date_edit_text);
         final EditText quantityEditText = dialog.findViewById(R.id.quantity_edit_text);
-        vaccineID = dialog.findViewById(R.id.vaccine_id_text_view);
+
+
+
 
         Button addButton = dialog.findViewById(R.id.add_button);
 
@@ -124,7 +127,7 @@ public class AddBatchActivity extends AppCompatActivity {
                 String batchNo = batchNoEditText.getText().toString();
                 String expiryDate = expiryDateEditText.getText().toString();
                 String quantity = quantityEditText.getText().toString();
-                batchData(batchNo,expiryDate,quantity);
+                batchData(batchNo ,expiryDate,quantity);
                 dialog.dismiss();
 
                 if (vaccineName.getText().toString().equals("Pfizer")){
@@ -204,8 +207,9 @@ public class AddBatchActivity extends AppCompatActivity {
 
     }
 
-    void batchData(String batchNo, String expiryDate, String quantity){
-        if (batchNo == "" || expiryDate == "" || quantity == "" ){
+    void batchData( String batchNo, String expiryDate, String quantity){
+
+        if (batchNo.equals("")  || expiryDate.equals("") || quantity.equals("") ){
             Toast.makeText( AddBatchActivity.this, "There are information that is not fill.", Toast.LENGTH_SHORT).show();
         }else{
             //Toast.makeText( AddBatchActivity.this, batchNo + " has been added", Toast.LENGTH_SHORT).show();
@@ -240,7 +244,7 @@ public class AddBatchActivity extends AppCompatActivity {
     
     public void ClickViewVaccine(View view){
         //Redirect activity to dashboard
-        redirectActivity(this, VaccineID.class);
+        redirectActivity(this, StaffViewVaccine.class);
     }
 
     /*public void ClickAboutUs(View view){

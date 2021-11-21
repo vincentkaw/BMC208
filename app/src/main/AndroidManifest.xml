@@ -10,16 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BMC208">
         <activity
-            android:name=".signinAdministrator"
-            android:exported="true" />
-        <activity
             android:name=".signup_healthcare"
             android:exported="true" />
         <activity
-            android:name=".signup"
-            android:exported="true" />
-        <activity
-            android:name=".signinPatient"
+            android:name=".administrator_batch"
             android:exported="true" />
         <activity
             android:name=".signup_patient"
@@ -46,7 +40,7 @@
             android:name=".AddBatchActivity"
             android:exported="true" />
         <activity
-            android:name=".MainActivity"
+            android:name=".signup"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
