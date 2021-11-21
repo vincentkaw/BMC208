@@ -11,10 +11,14 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 public class PatientViewVaccine extends AppCompatActivity {
 
     DrawerLayout drawerLayout;
+    Button pfizer;
+    Button Sino;
+    Button Astra;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +26,19 @@ public class PatientViewVaccine extends AppCompatActivity {
         setContentView(R.layout.activity_patient_view_vaccine);
 
         drawerLayout = findViewById(R.id.drawer_layout_patient);
+        pfizer = findViewById(R.id.button_patient_pfizer_vaccine);
+        Sino = findViewById(R.id.button_patient_sino_vaccine);
+        Astra = findViewById(R.id.button_patient_astra_vaccine);
+
+        pfizer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String vaccine = "PFIZER";
+                Intent center = new Intent(PatientViewVaccine.this, PatientViewCenter.class);
+                center.putExtra("vaccine", vaccine);
+                startActivity(center);
+            }
+        });
     }
 
     public void ClickMenu(View view){
