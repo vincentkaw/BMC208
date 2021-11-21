@@ -13,6 +13,9 @@
             android:name=".signup_healthcare"
             android:exported="true" />
         <activity
+            android:name=".signup"
+            android:exported="true" />
+        <activity
             android:name=".signin"
             android:exported="true" />
         <activity
@@ -34,16 +37,13 @@
             android:name=".PatientViewVaccine"
             android:exported="true" />
         <activity
-            android:name=".administrator_batch"
-            android:exported="true" />
-        <activity
             android:name=".VaccineID"
             android:exported="true" />
         <activity
             android:name=".AddBatchActivity"
             android:exported="true" />
         <activity
-            android:name=".signup"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

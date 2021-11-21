@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "123258639491",
+    "project_id": "bmc208-21f22",
+    "storage_bucket": "bmc208-21f22.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:123258639491:android:12c791e808a2d4cb5b77b6",
+        "android_client_info": {
+          "package_name": "com.example.bmc208"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "123258639491-kjatd65nib20gco1us1lpcef6d0q0hoq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdnHXT0Nf4cPuELSEgfgrpr4zF6TvoFwU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "123258639491-kjatd65nib20gco1us1lpcef6d0q0hoq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

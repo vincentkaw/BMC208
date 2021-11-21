@@ -1,5 +1,6 @@
 package com.example.bmc208;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
@@ -21,6 +22,12 @@ import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.UUID;
+
 public class AddBatchActivity extends AppCompatActivity {
     //Initialize variable
 
@@ -30,6 +37,7 @@ public class AddBatchActivity extends AppCompatActivity {
     TextView manufacturerName;
     TableLayout addBatchTable;
     Button addBatchButton;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public static void openDrawer(DrawerLayout drawerLayout) {
         drawerLayout.openDrawer(GravityCompat.START);
@@ -121,6 +129,77 @@ public class AddBatchActivity extends AppCompatActivity {
                 String quantity = quantityEditText.getText().toString();
                 batchData(batchNo ,expiryDate,quantity);
                 dialog.dismiss();
+
+                if (vaccineName.getText().toString().equals("Pfizer")){
+                    Pfizer_Batch batch = new Pfizer_Batch();
+                    batch.setPfizerID(UUID.randomUUID().toString());
+                    batch.setBatchID(batchNo);
+                    batch.setCenter("Pfizer Center");
+                    batch.setDate(expiryDate);
+                    batch.setQuantity(quantity);
+
+                    db.collection(Pfizer_Batch.COLLECTION_NAME)
+                            .document()
+                            .set(batch)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    Toast.makeText(AddBatchActivity.this, "Batch Successfully added", Toast.LENGTH_SHORT).show();
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(AddBatchActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+                else if (vaccineName.getText().toString().equals("Sinovac")){
+                    Sino_Batch batch = new Sino_Batch();
+                    batch.setSinoID(UUID.randomUUID().toString());
+                    batch.setBatchID(batchNo);
+                    batch.setCenter("Sino Center");
+                    batch.setDate(expiryDate);
+                    batch.setQuantity(quantity);
+
+                    db.collection(Sino_Batch.COLLECTION_NAME)
+                            .document()
+                            .set(batch)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    Toast.makeText(AddBatchActivity.this, "Batch Successfully added", Toast.LENGTH_SHORT).show();
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(AddBatchActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+                else if (vaccineName.getText().toString().equals("AstraZeneca")){
+                    Astra_Batch batch = new Astra_Batch();
+                    batch.setAstraID(UUID.randomUUID().toString());
+                    batch.setBatchID(batchNo);
+                    batch.setCenter("Astra Center");
+                    batch.setDate(expiryDate);
+                    batch.setQuantity(quantity);
+
+                    db.collection(Astra_Batch.COLLECTION_NAME)
+                            .document()
+                            .set(batch)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    Toast.makeText(AddBatchActivity.this, "Batch Successfully added", Toast.LENGTH_SHORT).show();
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(AddBatchActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+
             }
         });
 
@@ -133,7 +212,7 @@ public class AddBatchActivity extends AppCompatActivity {
         if (batchNo.equals("")  || expiryDate.equals("") || quantity.equals("") ){
             Toast.makeText( AddBatchActivity.this, "There are information that is not fill.", Toast.LENGTH_SHORT).show();
         }else{
-            Toast.makeText( AddBatchActivity.this, batchNo + " has been added", Toast.LENGTH_SHORT).show();
+            //Toast.makeText( AddBatchActivity.this, batchNo + " has been added", Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -221,4 +300,6 @@ public class AddBatchActivity extends AppCompatActivity {
         //Close drawer
         closeDrawer(drawerLayout);
     }
+
+
 }

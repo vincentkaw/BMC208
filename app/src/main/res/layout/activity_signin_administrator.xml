@@ -8,7 +8,7 @@
     android:layout_marginTop="30dp"
     android:background="#C94D618F"
     android:orientation="vertical"
-    tools:context=".signin">
+    tools:context=".signinPatient">
 
     <TextView
         android:layout_width="match_parent"
