@@ -114,7 +114,8 @@
         android:textSize="18sp"
         android:padding="8dp"
         android:backgroundTint="@color/black"
-        app:cornerRadius="10dp"/>
+        app:cornerRadius="10dp"
+        android:onClick="SignUpButtonClick"/>
 
     <TextView
         android:id="@+id/text_signup"

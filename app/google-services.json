@@ -1,33 +1,55 @@
 {
   "project_info": {
+<<<<<<< HEAD
+    "project_number": "1062250727367",
+    "project_id": "bmc208-578ac",
+    "storage_bucket": "bmc208-578ac.appspot.com"
+=======
     "project_number": "123258639491",
     "project_id": "bmc208-21f22",
     "storage_bucket": "bmc208-21f22.appspot.com"
+>>>>>>> origin/master
   },
   "client": [
     {
       "client_info": {
+<<<<<<< HEAD
+        "mobilesdk_app_id": "1:1062250727367:android:bb2f93c9da4547d0903be2",
+=======
         "mobilesdk_app_id": "1:123258639491:android:12c791e808a2d4cb5b77b6",
+>>>>>>> origin/master
         "android_client_info": {
           "package_name": "com.example.bmc208"
         }
       },
       "oauth_client": [
         {
+<<<<<<< HEAD
+          "client_id": "1062250727367-6u57llc0dv75pdda715h17vuiqlbvva5.apps.googleusercontent.com",
+=======
           "client_id": "123258639491-kjatd65nib20gco1us1lpcef6d0q0hoq.apps.googleusercontent.com",
+>>>>>>> origin/master
           "client_type": 3
         }
       ],
       "api_key": [
         {
+<<<<<<< HEAD
+          "current_key": "AIzaSyB4_AroE5zFgAy9KEcNizELSZJo4etRs_Q"
+=======
           "current_key": "AIzaSyDdnHXT0Nf4cPuELSEgfgrpr4zF6TvoFwU"
+>>>>>>> origin/master
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
+<<<<<<< HEAD
+              "client_id": "1062250727367-6u57llc0dv75pdda715h17vuiqlbvva5.apps.googleusercontent.com",
+=======
               "client_id": "123258639491-kjatd65nib20gco1us1lpcef6d0q0hoq.apps.googleusercontent.com",
+>>>>>>> origin/master
               "client_type": 3
             }
           ]
