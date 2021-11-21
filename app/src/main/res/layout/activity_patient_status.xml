@@ -1,45 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/drawer_layout_patient"
     tools:context=".PatientStatus"
+    android:layout_gravity="center"
+    android:background="@color/cardview_shadow_start_color"
     >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <include
-            layout="@layout/main_toolbar"/>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Vaccination ID"
+        android:id="@+id/label_vaccination_id"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/text_view_vaccination_id"
+        android:textStyle="bold"
+        android:textSize="40sp"
+        />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="STATUS"
-                android:textSize="30sp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="000123"
+        android:id="@+id/text_view_vaccination_id"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/label_vaccination_id"
+        app:layout_constraintBottom_toTopOf="@id/label_status"
+        android:textSize="30sp"
+        android:textColor="@color/teal_700"
+        />
 
-        </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Appointment Status"
+        android:id="@+id/label_status"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_view_vaccination_id"
+        app:layout_constraintBottom_toTopOf="@id/text_view_status"
+        android:textStyle="bold"
+        android:textSize="40sp"
+        />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pending"
+        android:id="@+id/text_view_status"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/label_status"
+        app:layout_constraintBottom_toTopOf="@id/label_appointment_date"
+        android:textSize="30sp"
+        android:textColor="@color/teal_700"
+        />
 
-    </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Appointment Date"
+        android:id="@+id/label_appointment_date"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_view_status"
+        app:layout_constraintBottom_toTopOf="@id/text_view_appointment_date"
+        android:textStyle="bold"
+        android:textSize="40sp"
+        />
 
-    <RelativeLayout
-        android:layout_width="300dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:background="@color/white">
-        <include
-            layout="@layout/nav_drawer_patient"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2021-12-30"
+        android:id="@+id/text_view_appointment_date"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/label_appointment_date"
+        app:layout_constraintBottom_toTopOf="@id/label_appointment_center"
+        android:textSize="30sp"
+        android:textColor="@color/teal_700"
+        />
 
-    </RelativeLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Appointment Center"
+        android:id="@+id/label_appointment_center"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_view_appointment_date"
+        app:layout_constraintBottom_toTopOf="@id/text_view_appointment_center"
+        android:textStyle="bold"
+        android:textSize="40sp"
+        />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hospital Subang"
+        android:id="@+id/text_view_appointment_center"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/label_appointment_center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="30sp"
+        android:textColor="@color/teal_700"
+        />
 
-</androidx.drawerlayout.widget.DrawerLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
