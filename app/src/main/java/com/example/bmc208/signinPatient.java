@@ -21,7 +21,7 @@ public class signinPatient extends AppCompatActivity {
         textViewSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(signinPatient.this, signup.class));
+                startActivity(new Intent(signinPatient.this, signup_patient.class));
             }
         });
     }

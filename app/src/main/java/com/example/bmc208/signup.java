@@ -19,6 +19,6 @@ public class signup extends AppCompatActivity {
     }
 
     public void administrator_page(View view) {
-        startActivity(new Intent(signup.this, signup_healthcare.class));
+        startActivity(new Intent(signup.this, signinAdministrator.class));
     }
 }
