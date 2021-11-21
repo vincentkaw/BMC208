@@ -40,6 +40,12 @@
             android:name=".AddBatchActivity"
             android:exported="true" />
         <activity
+            android:name=".signinPatient"
+            android:exported="true" />
+        <activity
+            android:name=".signinAdministrator"
+            android:exported="true" />
+        <activity
             android:name=".signup"
             android:exported="true">
             <intent-filter>
