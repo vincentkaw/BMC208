@@ -8,7 +8,7 @@
     android:layout_marginTop="30dp"
     android:background="#C94D618F"
     android:orientation="vertical"
-    tools:context=".signup_patient">
+    tools:context=".signup_healthcare">
 
     <TextView
         android:layout_width="match_parent"
@@ -54,6 +54,22 @@
         android:background="#B8E3ED"/>
 
     <EditText
+        android:id="@+id/enter_fullname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:textSize="18sp"
+        android:padding="8dp"
+        android:singleLine="true"
+        android:hint="Enter fullname"
+        android:inputType="textPersonName"
+        android:layout_gravity="center"
+        android:background="#B8E3ED"
+        />
+
+    <EditText
         android:id="@+id/enter_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -70,7 +86,7 @@
         />
 
     <EditText
-        android:id="@+id/enter_IC_passport"
+        android:id="@+id/enter_staffid"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -79,7 +95,7 @@
         android:textSize="18sp"
         android:padding="8dp"
         android:singleLine="true"
-        android:hint="Enter IC or passport"
+        android:hint="Enter staff ID"
         android:inputType="textPersonName"
         android:layout_gravity="center"
         android:background="#B8E3ED"
