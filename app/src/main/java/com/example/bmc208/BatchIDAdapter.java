@@ -26,7 +26,6 @@ public class BatchIDAdapter extends RecyclerView.Adapter<BatchIDAdapter.BatchIDV
     @Override
     public void onBindViewHolder(@NonNull BatchIDViewHolder holder, int position) {
         holder.bind(batches[position]);
-
     }
 
     @Override
@@ -43,7 +42,7 @@ public class BatchIDAdapter extends RecyclerView.Adapter<BatchIDAdapter.BatchIDV
         public BatchIDViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            viewBatchID = itemView.findViewById(R.id.text_batch_id);
+            viewBatchID = itemView.findViewById(R.id.text_view_batch_id);
             viewExpiryStatus = itemView.findViewById(R.id.text_view_status);
             viewAvailableQuantity = itemView.findViewById(R.id.text_view_available);
             viewPendingQuantity = itemView.findViewById(R.id.text_view_quantity);

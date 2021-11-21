@@ -23,6 +23,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="50dp"
                 android:fontFamily="sans-serif-medium"
+                android:id="@+id/text_view_batch_id"
                 android:text="Batch ID"
                 android:textSize="20sp" />
 
