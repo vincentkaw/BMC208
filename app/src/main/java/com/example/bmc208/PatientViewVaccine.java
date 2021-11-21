@@ -1,10 +1,12 @@
 package com.example.bmc208;
 
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,9 +16,6 @@ public class PatientViewVaccine extends AppCompatActivity {
 
     DrawerLayout drawerLayout;
 
-    public static void OpenDrawer(DrawerLayout drawerLayout){
-        drawerLayout.openDrawer(GravityCompat.START);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,69 +26,74 @@ public class PatientViewVaccine extends AppCompatActivity {
     }
 
     public void ClickMenu(View view){
+        openPatientDrawer(drawerLayout);
+    }
+
+    public static void openPatientDrawer(DrawerLayout drawerLayout) {
         drawerLayout.openDrawer(GravityCompat.START);
     }
 
-    public void ClickLogo(View view){
-        closeDrawer(drawerLayout);
+    public void clickLogo(View view) {
+        closePatientDrawer(drawerLayout);
     }
 
-    private void closeDrawer(DrawerLayout drawerLayout) {
+    public static void closePatientDrawer(DrawerLayout drawerLayout) {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)){
             drawerLayout.closeDrawer(GravityCompat.START);
         }
     }
 
-    public void scheduleAppointment(){
+    public void scheduleAppointment(View view){
         recreate();
     }
 
-    public void status(){
-        redirectActivity(this, PatientStatus.class);
-    }
-
-    private void redirectActivity(PatientViewVaccine patientViewVaccine, Class<PatientStatus> patientStatusClass) {
-        Intent intent = new Intent(patientViewVaccine, patientStatusClass);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        patientViewVaccine.startActivity(intent);
+    public void status(View view){
+        redirectPatientActivity(this, PatientStatus.class);
+        
     }
 
     public void ClickLogout(View view){
-        logout(this);
+        logoutPatient(this);
     }
 
-    private void logout(PatientViewVaccine patientViewVaccine) {
-        //Initialize alert dialog
-        AlertDialog.Builder builder = new AlertDialog.Builder(patientViewVaccine);
-        //Set title
+    public static void logoutPatient(final Activity activity) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+
         builder.setTitle("Logout");
-        //Set message
-        builder.setMessage("Are you sure you want to logout?");
-        //Positive yes button
+
+        builder.setMessage("Are you sure you want to logout ?");
+
         builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                //Finish activity
-                patientViewVaccine.finishAffinity();
-                //Exit app
+
+                activity.finishAffinity();
+
                 System.exit(0);
             }
         });
-        //Negative no button
         builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                //Dismiss dialog
+
                 dialog.dismiss();
             }
         });
-        //Show dialog
+
         builder.show();
+
+    }
+
+
+    public static void redirectPatientActivity(Activity activity, Class aClass) {
+        Intent intent = new Intent(activity, aClass);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        activity.startActivity(intent);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        closeDrawer(drawerLayout);
+        closePatientDrawer(drawerLayout);
     }
 }
