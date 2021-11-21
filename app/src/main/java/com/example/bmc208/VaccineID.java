@@ -35,7 +35,7 @@ public class VaccineID extends AppCompatActivity {
 
     public void ClickViewVaccine(View view){
         //Recreate activity
-        recreate();
+        AddBatchActivity.redirectActivity(this, StaffViewVaccine.class);
     }
 
     /*public void ClickAboutUs(View view){
