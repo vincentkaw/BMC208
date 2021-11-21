@@ -55,7 +55,8 @@ tools:context=".PatientViewVaccine"
             app:layout_constraintBottom_toTopOf="@id/button_patient_astra_vaccine"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@id/constraint_layout_patient_buttons" />
+            app:layout_constraintTop_toTopOf="@id/constraint_layout_patient_buttons"
+            />
 
         <Button
             android:id="@+id/button_patient_astra_vaccine"
@@ -67,7 +68,8 @@ tools:context=".PatientViewVaccine"
             app:layout_constraintBottom_toTopOf="@id/button_patient_sino_vaccine"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/button_patient_pfizer_vaccine" />
+            app:layout_constraintTop_toBottomOf="@id/button_patient_pfizer_vaccine"
+            />
 
         <Button
 
@@ -79,7 +81,8 @@ tools:context=".PatientViewVaccine"
             app:layout_constraintBottom_toTopOf="@id/button_patient_astra_vaccine"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/button_patient_astra_vaccine" />
+            app:layout_constraintTop_toBottomOf="@id/button_patient_astra_vaccine"
+            />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
