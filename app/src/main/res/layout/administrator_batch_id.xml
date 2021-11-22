@@ -62,7 +62,7 @@
                 android:layout_below="@id/text_view_batch_id"
                 android:layout_marginLeft="50dp"
                 android:layout_marginTop="4dp"
-                android:layout_toEndOf="@id/text_view_expiry_date"
+                android:layout_toEndOf="@id/text_view_status"
                 android:fontFamily="sans-serif-medium"
                 android:textSize="20sp"
                 tools:text="No of Quantity" />

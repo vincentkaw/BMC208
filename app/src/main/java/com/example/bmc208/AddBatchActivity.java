@@ -157,7 +157,7 @@ public class AddBatchActivity extends AppCompatActivity {
                     Sino_Batch batch = new Sino_Batch();
                     batch.setSinoID(UUID.randomUUID().toString());
                     batch.setBatchID(batchNo);
-                    batch.setCenter("Sino Center");
+                    batch.setCenter("Fake Center");
                     batch.setDate(expiryDate);
                     batch.setQuantity(quantity);
 
@@ -180,7 +180,7 @@ public class AddBatchActivity extends AppCompatActivity {
                     Astra_Batch batch = new Astra_Batch();
                     batch.setAstraID(UUID.randomUUID().toString());
                     batch.setBatchID(batchNo);
-                    batch.setCenter("Astra Center");
+                    batch.setCenter("Fake Center");
                     batch.setDate(expiryDate);
                     batch.setQuantity(quantity);
 
