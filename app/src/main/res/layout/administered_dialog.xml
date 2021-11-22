@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/add_batch_dialog_contraint_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="25dp"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/vaccine_id_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Vaccine ID"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        tools:ignore="MissingConstraints" />
+
+
+    <TextView
+        android:id="@+id/batch_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Batch ID:"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/batch_id_text_view"
+        app:layout_constraintTop_toBottomOf="@+id/vaccine_id_text_view"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/batch_id_text_view"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:text="Batch ID"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toRightOf="@id/batch_text_view"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vaccine_id_text_view"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/expiry_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Expiry Date:"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/expiry_date_text_view"
+        app:layout_constraintTop_toBottomOf="@+id/batch_id_text_view"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/expiry_date_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Expiry Date"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toRightOf="@id/expiry_text_view"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/batch_id_text_view"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/manufacture_name_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Manufacturer Name:"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/manufacture_text_view"
+        app:layout_constraintTop_toBottomOf="@+id/expiry_date_text_view"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/manufacture_text_view"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Manufacturer"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toRightOf="@id/manufacture_name_text_view"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/expiry_date_text_view"
+        android:inputType="number"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/vaccine_name_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Vaccine Name:"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/vaccine_text_view"
+        app:layout_constraintTop_toBottomOf="@+id/manufacture_name_text_view"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/vaccine_text_view"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Vaccine"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toRightOf="@id/vaccine_name_text_view"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/manufacture_name_text_view"
+        android:inputType="number"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/names_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Name:"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/name_text_view"
+        app:layout_constraintTop_toBottomOf="@+id/vaccine_name_text_view"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/name_text_view"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Name"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toRightOf="@id/names_text_view"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vaccine_name_text_view"
+        android:inputType="number"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/ic_no_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="IC:"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/ic_text_view"
+        app:layout_constraintTop_toBottomOf="@+id/names_text_view"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/ic_text_view"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="IC"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toRightOf="@id/ic_no_text_view"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/names_text_view"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/remarks_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Remarks:"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/remarks_edit_text"
+        app:layout_constraintTop_toBottomOf="@+id/ic_no_text_view"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/remarks_edit_text"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:layout_constraintLeft_toRightOf="@id/remarks_text_view"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ic_no_text_view"
+        tools:ignore="MissingConstraints" />
+
+
+
+
+
+    <Button
+        android:id="@+id/administered_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Adminstered"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/remarks_text_view"
+
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

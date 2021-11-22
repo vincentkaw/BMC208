@@ -27,6 +27,7 @@
                 android:layout_height="match_parent"
                 tools:context=".StaffViewVaccineBatch"
                 tools:listitem="@layout/staff_vaccine_batch_id"
+                android:id="@+id/recycler_view_vaccine_id"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
             </androidx.recyclerview.widget.RecyclerView>
 
