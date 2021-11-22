@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
 public class administrator_batch extends AppCompatActivity {
 
     DrawerLayout drawerLayout;
@@ -21,11 +23,11 @@ public class administrator_batch extends AppCompatActivity {
 
         RecyclerView recyclerView = findViewById(R.id.recycler_view_administrator_batch_id);
 
-        BatchID[] batches = {
-                new BatchID("P10000", "12/12/2021", "10","1"),
-                new BatchID("P20000", "12/12/2021", "20","2"),
-                new BatchID("P30000", "12/12/2021", "30","3")
-        };
+        ArrayList<BatchID> batches = new ArrayList<BatchID>();
+        batches.add(new BatchID("P000001", "12/12/12", "30", "1"));
+        batches.add(new BatchID("P000001", "12/12/12", "20", "2"));
+        batches.add(new BatchID("P000001", "12/12/12", "10", "3"));
+
 
         BatchIDAdapter adapter = new BatchIDAdapter(batches);
         recyclerView.setAdapter(adapter);
@@ -37,7 +39,7 @@ public class administrator_batch extends AppCompatActivity {
 
                 Intent intent = new Intent(administrator_batch.this, VaccineID.class);
                 //We have to pass key-value parameters
-                intent.putExtra("BatchID", batches[position]);
+                intent.putExtra("BatchID", batches.get(position));
                 startActivity(intent);
 
 
