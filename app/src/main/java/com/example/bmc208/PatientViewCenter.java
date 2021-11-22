@@ -42,21 +42,21 @@ public class PatientViewCenter extends AppCompatActivity {
             String value = extras.getString("vaccine");
             vaccineName.setText(value);
 
-            if (vaccineName.getText().toString().equals("PFIZER")){
+            if (vaccineName.getText().toString().equals("PFIZER")) {
                 db.collection("PFIZER_BATCH")
                         .get()
                         .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                if (task.isSuccessful()){
+                                if (task.isSuccessful()) {
                                     for (QueryDocumentSnapshot document : task.getResult()) {
                                         String flag = "not same";
-                                        for (int i = 0; i < centers.size(); i++){
+                                        for (int i = 0; i < centers.size(); i++) {
                                             if (document.getString("center").equals(centers.get(i))) {
-                                               flag = "same";
-                                               }
+                                                flag = "same";
                                             }
-                                        if (flag.equals("not same")){
+                                        }
+                                        if (flag.equals("not same")) {
                                             centers.add(document.getString("center"));
                                         }
                                     }
@@ -67,10 +67,59 @@ public class PatientViewCenter extends AppCompatActivity {
                             }
                         });
             }
+            if (vaccineName.getText().toString().equals("SINO")) {
+                db.collection("SINO_BATCH")
+                        .get()
+                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    for (QueryDocumentSnapshot document : task.getResult()) {
+                                        String flag = "not same";
+                                        for (int i = 0; i < centers.size(); i++) {
+                                            if (document.getString("center").equals(centers.get(i))) {
+                                                flag = "same";
+                                            }
+                                        }
+                                        if (flag.equals("not same")) {
+                                            centers.add(document.getString("center"));
+                                        }
+                                    }
+                                    centers.remove(0);
+                                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(PatientViewCenter.this, android.R.layout.simple_list_item_1, centers);
+                                    centerList.setAdapter(adapter);
+                                }
+                            }
+                        });
 
+            }
+            if (vaccineName.getText().toString().equals("ASTRA")) {
+                db.collection("ASTRA_BATCH")
+                        .get()
+                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    for (QueryDocumentSnapshot document : task.getResult()) {
+                                        String flag = "not same";
+                                        for (int i = 0; i < centers.size(); i++) {
+                                            if (document.getString("center").equals(centers.get(i))) {
+                                                flag = "same";
+                                            }
+                                        }
+                                        if (flag.equals("not same")) {
+                                            centers.add(document.getString("center"));
+                                        }
+                                    }
+                                    centers.remove(0);
+                                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(PatientViewCenter.this, android.R.layout.simple_list_item_1, centers);
+                                    centerList.setAdapter(adapter);
+                                }
+                            }
+                        });
+
+            }
         }
-
-
     }
 
     public void ClickMenu(View view){
