@@ -8,12 +8,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
 public class PatientBatchIDAdapter extends RecyclerView.Adapter<PatientBatchIDAdapter.PatientBatchIdViewHolder>{
 
+    ArrayList<PatientBatchID> patientBatches;
 
-    private final PatientBatchID[] patientBatches;
-
-    public PatientBatchIDAdapter(PatientBatchID[] batches){
+    public PatientBatchIDAdapter(ArrayList<PatientBatchID> batches){
         this.patientBatches = batches;
     }
 
@@ -26,12 +27,12 @@ public class PatientBatchIDAdapter extends RecyclerView.Adapter<PatientBatchIDAd
 
     @Override
     public void onBindViewHolder(@NonNull PatientBatchIdViewHolder holder, int position) {
-        holder.bind(patientBatches[position]);
+        holder.bind(patientBatches.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return patientBatches.length;
+        return patientBatches.size();
     }
 
 
