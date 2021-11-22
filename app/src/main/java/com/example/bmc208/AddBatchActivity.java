@@ -163,7 +163,7 @@ public class AddBatchActivity extends AppCompatActivity implements DatePickerDia
                     Pfizer_Batch batch = new Pfizer_Batch();
                     batch.setPfizerID(UUID.randomUUID().toString());
                     batch.setBatchID(batchNo);
-                    batch.setCenter("Pfizer Center");
+                    batch.setCenter("Test Center");
                     batch.setDate(expiryDate);
                     batch.setQuantity(quantity);
 
