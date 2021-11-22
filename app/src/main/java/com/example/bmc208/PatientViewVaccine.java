@@ -39,6 +39,26 @@ public class PatientViewVaccine extends AppCompatActivity {
                 startActivity(center);
             }
         });
+
+        Sino.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String vaccine ="SINO";
+                Intent center = new Intent(PatientViewVaccine.this, PatientViewCenter.class);
+                center.putExtra("vaccine", vaccine);
+                startActivity(center);
+            }
+        });
+
+        Astra.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String vaccine ="ASTRA";
+                Intent center = new Intent(PatientViewVaccine.this, PatientViewCenter.class);
+                center.putExtra("vaccine", vaccine);
+                startActivity(center);
+            }
+        });
     }
 
     public void ClickMenu(View view){

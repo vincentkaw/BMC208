@@ -1,34 +1,35 @@
 package com.example.bmc208;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-
 import android.app.Activity;
-import android.app.Dialog;
+import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.DialogFragment;
+
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.UUID;
+import java.text.DateFormat;
+import java.util.Calendar;
 
-public class AddBatchActivity extends AppCompatActivity {
+public class AddBatchActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     //Initialize variable
 
     DrawerLayout drawerLayout;
@@ -37,6 +38,14 @@ public class AddBatchActivity extends AppCompatActivity {
     TextView manufacturerName;
     TableLayout addBatchTable;
     Button addBatchButton;
+    ConstraintLayout addBatchLayout;
+    EditText batchNo;
+    EditText quantity;
+    TextView vaccineID;
+    TextView expiryDate;
+    Button addButton;
+    ImageView calendar;
+
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public static void openDrawer(DrawerLayout drawerLayout) {
@@ -55,6 +64,15 @@ public class AddBatchActivity extends AppCompatActivity {
         manufacturerName = findViewById(R.id.manufacturer_name_text_view);
         addBatchTable = findViewById(R.id.add_batch_table_layout);
         addBatchButton = findViewById(R.id.add_batch_button);
+        addBatchLayout = findViewById(R.id.add_batch_constraint_layout);
+        batchNo = findViewById(R.id.batch_no_edit_text);
+        quantity = findViewById(R.id.quantity_edit_text);
+        vaccineID = findViewById(R.id.vaccine_id_text_view);
+        expiryDate = findViewById(R.id.date_text_view);
+        addButton = findViewById(R.id.add_button);
+        calendar = findViewById(R.id.expiry_date_Image_view);
+
+
 
         ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(AddBatchActivity.this,
                 android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.vaccines));
@@ -65,22 +83,31 @@ public class AddBatchActivity extends AppCompatActivity {
         vaccineSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String vaccineNo = "";
+
                 switch (i){
                     case 0:
+                        addBatchLayout.setVisibility(View.INVISIBLE);
                         addBatchTable.setVisibility(View.INVISIBLE);
                         break;
                     case 1:
                         addBatchTable.setVisibility(View.VISIBLE);
+                        addBatchLayout.setVisibility(View.INVISIBLE);
+                        vaccineID.setText("P000001");
                         vaccineName.setText("Pfizer");
                         manufacturerName.setText("Pfizer Inc");
                         break;
                     case 2:
                         addBatchTable.setVisibility(View.VISIBLE);
+                        addBatchLayout.setVisibility(View.INVISIBLE);
                         vaccineName.setText("Sinovac");
+                        vaccineID.setText("S000001");
                         manufacturerName.setText("Sinovac Biotech Ltd");
                         break;
                     case 3:
                         addBatchTable.setVisibility(View.VISIBLE);
+                        addBatchLayout.setVisibility(View.INVISIBLE);
+                        vaccineID.setText("A000001");
                         vaccineName.setText("AstraZeneca");
                         manufacturerName.setText("AstraZeneca plc");
                         break;
@@ -91,41 +118,43 @@ public class AddBatchActivity extends AppCompatActivity {
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
+
+
             }
         });
         
         addBatchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                addBatchLayout.setVisibility(View.VISIBLE);
 
 
-                showAddBatchDialog();
+            }
+        });
+
+        calendar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DialogFragment datePicker = new DatePickerFragment();
+                datePicker.show(getSupportFragmentManager(), "date picker");
+            }
+        });
+
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addBatchLayout.setVisibility(View.INVISIBLE);
             }
         });
 
     }
 
-    private void showAddBatchDialog() {
-        final Dialog dialog = new Dialog( AddBatchActivity.this);
 
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setCancelable(true);
-        dialog.setContentView(R.layout.add_batch_dialog);
-
-        final EditText batchNoEditText = dialog.findViewById(R.id.batch_no_edit_text);
-        final EditText expiryDateEditText = dialog.findViewById(R.id.expiry_date_edit_text);
-        final EditText quantityEditText = dialog.findViewById(R.id.quantity_edit_text);
-
-
-
-
-        Button addButton = dialog.findViewById(R.id.add_button);
-
-        addButton.setOnClickListener(new View.OnClickListener() {
+       /* addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String batchNo = batchNoEditText.getText().toString();
-                String expiryDate = expiryDateEditText.getText().toString();
+                String expiryDate = expiryDateTextView.getText().toString();
                 String quantity = quantityEditText.getText().toString();
                 batchData(batchNo ,expiryDate,quantity);
                 dialog.dismiss();
@@ -134,7 +163,7 @@ public class AddBatchActivity extends AppCompatActivity {
                     Pfizer_Batch batch = new Pfizer_Batch();
                     batch.setPfizerID(UUID.randomUUID().toString());
                     batch.setBatchID(batchNo);
-                    batch.setCenter("Pfizer Center");
+                    batch.setCenter("Test Center");
                     batch.setDate(expiryDate);
                     batch.setQuantity(quantity);
 
@@ -157,7 +186,7 @@ public class AddBatchActivity extends AppCompatActivity {
                     Sino_Batch batch = new Sino_Batch();
                     batch.setSinoID(UUID.randomUUID().toString());
                     batch.setBatchID(batchNo);
-                    batch.setCenter("Sino Center");
+                    batch.setCenter("Fake Center");
                     batch.setDate(expiryDate);
                     batch.setQuantity(quantity);
 
@@ -180,7 +209,7 @@ public class AddBatchActivity extends AppCompatActivity {
                     Astra_Batch batch = new Astra_Batch();
                     batch.setAstraID(UUID.randomUUID().toString());
                     batch.setBatchID(batchNo);
-                    batch.setCenter("Astra Center");
+                    batch.setCenter("Fake Center");
                     batch.setDate(expiryDate);
                     batch.setQuantity(quantity);
 
@@ -201,11 +230,20 @@ public class AddBatchActivity extends AppCompatActivity {
                 }
 
             }
-        });
+        });*/
 
-        dialog.show();
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.YEAR, year);
+        c.set(Calendar.MONTH, month);
+        c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+        String currentDateString = DateFormat.getDateInstance().format(c.getTime());
 
+        expiryDate.setText(currentDateString);
     }
+
+
 
     void batchData( String batchNo, String expiryDate, String quantity){
 

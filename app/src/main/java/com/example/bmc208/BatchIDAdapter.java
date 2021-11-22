@@ -8,11 +8,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
 public class BatchIDAdapter extends RecyclerView.Adapter<BatchIDAdapter.BatchIDViewHolder>{
 
-    private final BatchID[] batches;
+    ArrayList<BatchID> batches;
 
-    public BatchIDAdapter(BatchID[] batches){
+    public BatchIDAdapter(ArrayList<BatchID> batches){
         this.batches = batches;
     }
 
@@ -25,12 +27,12 @@ public class BatchIDAdapter extends RecyclerView.Adapter<BatchIDAdapter.BatchIDV
 
     @Override
     public void onBindViewHolder(@NonNull BatchIDViewHolder holder, int position) {
-        holder.bind(batches[position]);
+        holder.bind(batches.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return batches.length;
+        return batches.size();
     }
 
     public static class  BatchIDViewHolder extends RecyclerView.ViewHolder{
