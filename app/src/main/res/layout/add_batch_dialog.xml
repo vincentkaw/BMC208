@@ -53,17 +53,31 @@
         android:textSize="22sp"
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/expiry_date_edit_text"
+        app:layout_constraintRight_toLeftOf="@id/expiry_date_Image_view"
         app:layout_constraintTop_toBottomOf="@+id/batch_no_edit_text"
         tools:ignore="MissingConstraints" />
 
-    <EditText
-        android:id="@+id/expiry_date_edit_text"
-        android:layout_width="150dp"
+    <ImageView
+        android:id="@+id/expiry_date_Image_view"
+        android:src="@drawable/ic_calendar"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:layout_marginLeft="30dp"
         app:layout_constraintLeft_toRightOf="@id/expiry_date_text_view"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/batch_no_edit_text"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/date_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Date"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:layout_marginLeft="30dp"
+        app:layout_constraintLeft_toRightOf="@id/expiry_date_Image_view"
         app:layout_constraintTop_toBottomOf="@+id/batch_no_edit_text"
         tools:ignore="MissingConstraints" />
 
@@ -77,7 +91,7 @@
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/quantity_edit_text"
-        app:layout_constraintTop_toBottomOf="@+id/expiry_date_edit_text"
+        app:layout_constraintTop_toBottomOf="@+id/expiry_date_Image_view"
         tools:ignore="MissingConstraints" />
 
     <EditText
@@ -87,7 +101,7 @@
         android:layout_marginTop="10dp"
         app:layout_constraintLeft_toRightOf="@id/quantity_text_view"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/expiry_date_edit_text"
+        app:layout_constraintTop_toBottomOf="@+id/expiry_date_Image_view"
         android:inputType="number"
         tools:ignore="MissingConstraints" />
 

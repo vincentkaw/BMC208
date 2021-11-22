@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,6 +25,8 @@ public class signinAdministrator extends AppCompatActivity {
     EditText username;
     EditText password;
     Button btnLogin;
+    CheckBox showPassword;
+    CheckBox rememberMe;
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     public static Administrator Administrator;
@@ -36,6 +40,8 @@ public class signinAdministrator extends AppCompatActivity {
         password = findViewById(R.id.enter_password);
         btnLogin = findViewById(R.id.btn_login);
         textViewSignUp = findViewById(R.id.text_signup);
+        showPassword = findViewById(R.id.show_password);
+        rememberMe = findViewById(R.id.remember);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,5 +76,7 @@ public class signinAdministrator extends AppCompatActivity {
                 startActivity(new Intent(signinAdministrator.this, signup_healthcare.class));
             }
         });
+
     }
 }
+

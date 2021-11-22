@@ -43,7 +43,7 @@ public class VaccineID extends AppCompatActivity {
         VaccineAdapter adapter = new VaccineAdapter(vaccines);
         recyclerView.setAdapter(adapter);
 
-        /* recyclerView.addOnItemTouchListener(new RecyclerViewItemClickListener(recyclerView, new RecyclerViewItemClickListener.OnItemClickListener() {
+        recyclerView.addOnItemTouchListener(new RecyclerViewItemClickListener(recyclerView, new RecyclerViewItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                final Dialog confirmDialog = new Dialog(VaccineID.this);
@@ -61,21 +61,13 @@ public class VaccineID extends AppCompatActivity {
                 Button rejectButton = confirmDialog.findViewById(R.id.reject_button);
                 Button administeredButton = administeredDialog.findViewById(R.id.administered_button);
 
-                if(Collections.singleton(vaccines).contains("Pending")){
                     confirmDialog.show();
-                }else if (Collections.singleton(vaccines).contains("Confirmed")){
-                    administeredDialog.show();
-                }
+
 
             }
-        }));*/
+        }));
 
     }
-
-    //private void showDialog(ArrayList<Vaccine>vaccines) {
-
-
-    //}
 
     public void ClickMenu(View view){
         //Open drawer

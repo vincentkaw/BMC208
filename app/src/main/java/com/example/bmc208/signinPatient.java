@@ -70,5 +70,7 @@ public class signinPatient extends AppCompatActivity {
                 startActivity(new Intent(signinPatient.this, signup_patient.class));
             }
         });
+
+
     }
 }

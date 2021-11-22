@@ -7,4 +7,11 @@
         <item>Sinovac - S000001</item>
         <item>AstraZeneca - A000001</item>
     </string-array>
+
+    <string-array name="center">
+        <item>Subang Center</item>
+        <item>Sunway Center</item>
+        <item>Damansara Center</item>
+        <item>One U Center</item>
+    </string-array>
 </resources>

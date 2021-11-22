@@ -28,12 +28,19 @@
                 android:textSize="20sp" />
 
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="4dp"
+                android:text="No of Available:"
+                android:textSize="15sp" />
+
+            <TextView
                 android:id="@+id/text_view_available"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="90dp"
                 android:fontFamily="sans-serif-medium"
-                android:text="No of Available"
+                android:text="No"
                 android:textSize="20sp" />
 
         </LinearLayout>
@@ -45,10 +52,15 @@
             android:orientation="horizontal">
 
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:text="Expiry Status:"
+                android:textSize="15sp" />
+            <TextView
                 android:id="@+id/text_view_status"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="50dp"
                 android:layout_marginTop="4dp"
                 android:layout_toEndOf="@id/text_view_batch_id"
                 android:fontFamily="sans-serif-medium"
@@ -56,16 +68,22 @@
                 tools:text="Expiry Status" />
 
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="4dp"
+                android:text="Expiry Status:"
+                android:textSize="15sp" />
+            <TextView
                 android:id="@+id/text_view_quantity"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_below="@id/text_view_batch_id"
-                android:layout_marginLeft="50dp"
                 android:layout_marginTop="4dp"
                 android:layout_toEndOf="@id/text_view_status"
                 android:fontFamily="sans-serif-medium"
                 android:textSize="20sp"
-                tools:text="No of Quantity" />
+                tools:text="No" />
 
         </LinearLayout>
 

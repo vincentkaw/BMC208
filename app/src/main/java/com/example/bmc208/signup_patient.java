@@ -48,28 +48,77 @@ public class signup_patient extends AppCompatActivity {
 
     public void SignUpButtonClick(View view) {
 
-        Patient patient = new Patient();
-        patient.setPatientid(UUID.randomUUID().toString());
-        patient.setUsername(username.getText().toString());
-        patient.setPassword(password.getText().toString());
-        patient.setEmail(email.getText().toString());
-        patient.setIc_passport(icPassword.getText().toString());
+        String name = username.getText().toString();
+        String passwords = icPassword.getText().toString();
+        String emails = email.getText().toString();
+        String ic = icPassword.getText().toString();
+        boolean check = validationinfo(name,passwords,emails,ic);
 
-        db.collection(Patient.COLLECTION_NAME)
-                .document()
-                .set(patient)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        signinPatient.Patient = patient;
-                        startActivity(new Intent(signup_patient.this, signinPatient.class));
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(signup_patient.this, e.getMessage(), Toast.LENGTH_LONG).show();
-                    }
-                });
+        if (check==true){
+            Patient patient = new Patient();
+            patient.setPatientid(UUID.randomUUID().toString());
+            patient.setUsername(username.getText().toString());
+            patient.setPassword(password.getText().toString());
+            patient.setEmail(email.getText().toString());
+            patient.setIc_passport(icPassword.getText().toString());
+
+            db.collection(Patient.COLLECTION_NAME)
+                    .document()
+                    .set(patient)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            signinPatient.Patient = patient;
+                            Toast.makeText(getApplicationContext(), "Data is valid", Toast.LENGTH_LONG).show();
+                            startActivity(new Intent(signup_patient.this, signinPatient.class));
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(signup_patient.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    });
+        }
+        else{
+            Toast.makeText(getApplicationContext(), "Check your details again", Toast.LENGTH_LONG).show();
+        }
     }
+
+    private boolean validationinfo(String name, String passwords, String emails, String ic) {
+
+        if (name.length()==0){
+            username.requestFocus();
+            username.setError("Username cannot be empty");
+            return false;
+        }
+        else if (!name.matches("[a-zA-Z]")){
+            username.requestFocus();
+            username.setError("Enter alphabetical charactor only");
+            return false;
+        }
+        else if (passwords.length()<=6){
+            password.requestFocus();
+            password.setError("Password minimum must have 6 charactors");
+            return false;
+        }
+        else if (!emails.matches("[a-zA-Z0-9._]+@[a-z]+\\.+[a-z]+")){
+            email.requestFocus();
+            email.setError("Enter valid error");
+            return false;
+        }
+        else if (ic.length()==0){
+            icPassword.requestFocus();
+            icPassword.setError("Ic or Passport cannot be empty");
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
 }
+
+
+
+
