@@ -362,7 +362,12 @@ public class AddBatchActivity extends AppCompatActivity implements DatePickerDia
     
     public void ClickViewVaccine(View view){
         //Redirect activity to dashboard
-        redirectActivity(this, StaffViewVaccine.class);
+        Bundle extras = getIntent().getExtras();
+        String center = extras.getString("adminCenter");
+        Intent intent = new Intent(AddBatchActivity.this, StaffViewVaccine.class);
+        intent.putExtra("adminCenter", center);
+        startActivity(intent);
+        //redirectActivity(this, StaffViewVaccine.class);
     }
 
 

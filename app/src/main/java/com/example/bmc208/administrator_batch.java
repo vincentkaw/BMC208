@@ -114,12 +114,23 @@ public class administrator_batch extends AppCompatActivity {
 
     public void ClickAddBatch(View view){
         //Redirect activity to home
-        AddBatchActivity.redirectActivity(this, AddBatchActivity.class);
+        //AddBatchActivity.redirectActivity(this, AddBatchActivity.class);
+
+        Bundle extras = getIntent().getExtras();
+        String center = extras.getString("adminCenter");
+        Intent intent = new Intent(administrator_batch.this, AddBatchActivity.class);
+        intent.putExtra("adminCenter", center);
+        startActivity(intent);
     }
 
     public void ClickViewVaccine(View view){
         //Recreate activity
-        AddBatchActivity.redirectActivity(this, StaffViewVaccine.class);
+        //AddBatchActivity.redirectActivity(this, StaffViewVaccine.class);
+        Bundle extras = getIntent().getExtras();
+        String center = extras.getString("adminCenter");
+        Intent intent = new Intent(administrator_batch.this, StaffViewVaccine.class);
+        intent.putExtra("adminCenter", center);
+        startActivity(intent);
     }
 
     public void ClickLogOut(View view){

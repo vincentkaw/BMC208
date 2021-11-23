@@ -103,12 +103,22 @@ public class VaccineID extends AppCompatActivity {
 
     public void ClickAddBatch(View view){
         //Redirect activity to home
-        AddBatchActivity.redirectActivity(this, AddBatchActivity.class);
+        //AddBatchActivity.redirectActivity(this, AddBatchActivity.class);
+        Bundle extras = getIntent().getExtras();
+        String center = extras.getString("adminCenter");
+        Intent intent = new Intent(VaccineID.this, AddBatchActivity.class);
+        intent.putExtra("adminCenter", center);
+        startActivity(intent);
     }
 
     public void ClickViewVaccine(View view){
         //Recreate activity
-        AddBatchActivity.redirectActivity(this, StaffViewVaccine.class);
+        //AddBatchActivity.redirectActivity(this, StaffViewVaccine.class);
+        Bundle extras = getIntent().getExtras();
+        String center = extras.getString("adminCenter");
+        Intent intent = new Intent(VaccineID.this, StaffViewVaccine.class);
+        intent.putExtra("adminCenter", center);
+        startActivity(intent);
     }
 
     /*public void ClickAboutUs(View view){
