@@ -39,9 +39,13 @@ public class PatientViewBatch extends AppCompatActivity implements DatePickerDia
         drawerLayout = findViewById(R.id.drawer_layout_patient);
         RecyclerView recyclerView = findViewById(R.id.recycler_view_patient_batch_id);
 
+        Bundle extras = getIntent().getExtras();
+        String name = extras.getString("patientUsername");
+        String password = extras.getString("patientPassword");
+
         String batch = "";
 
-        Bundle extras = getIntent().getExtras();
+
         if (extras != null){
             String center = extras.getString("center");
             String vaccine = extras.getString("vaccine");
@@ -96,7 +100,6 @@ public class PatientViewBatch extends AppCompatActivity implements DatePickerDia
             public void onItemClick(View view, int position) {
                 DialogFragment datePicker = new DatePickerFragment();
                 datePicker.show(getSupportFragmentManager(), "date picker");
-
             }
         }));
 

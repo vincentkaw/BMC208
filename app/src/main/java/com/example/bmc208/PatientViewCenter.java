@@ -43,6 +43,8 @@ public class PatientViewCenter extends AppCompatActivity {
         if (extras != null) { //get vaccine name from selecting vaccine
             String value = extras.getString("vaccine");
             vaccineName.setText(value);
+            String name = extras.getString("patientUsername");
+            String password = extras.getString("patientPassword");
 
             if (vaccineName.getText().toString().equals("PFIZER")) {
                 db.collection("PFIZER_BATCH")
@@ -72,6 +74,8 @@ public class PatientViewCenter extends AppCompatActivity {
                                             Intent batch = new Intent(PatientViewCenter.this, PatientViewBatch.class);
                                             batch.putExtra("center", selectedCenter);
                                             batch.putExtra("vaccine", vaccineName.getText().toString());
+                                            batch.putExtra("patientUsername", name);
+                                            batch.putExtra("patientPassword", password);
                                             startActivity(batch);
                                         }
                                     });
@@ -107,6 +111,8 @@ public class PatientViewCenter extends AppCompatActivity {
                                             Intent batch = new Intent(PatientViewCenter.this, PatientViewBatch.class);
                                             batch.putExtra("center", selectedCenter);
                                             batch.putExtra("vaccine", vaccineName.getText().toString());
+                                            batch.putExtra("patientUsername", name);
+                                            batch.putExtra("patientPassword", password);
                                             startActivity(batch);
                                         }
                                     });
@@ -143,6 +149,8 @@ public class PatientViewCenter extends AppCompatActivity {
                                             Intent batch = new Intent(PatientViewCenter.this, PatientViewBatch.class);
                                             batch.putExtra("center", selectedCenter);
                                             batch.putExtra("vaccine", vaccineName.getText().toString());
+                                            batch.putExtra("patientUsername", name);
+                                            batch.putExtra("patientPassword", password);
                                             startActivity(batch);
                                         }
                                     });
