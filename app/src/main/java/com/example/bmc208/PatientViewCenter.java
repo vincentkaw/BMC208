@@ -4,8 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -63,6 +65,16 @@ public class PatientViewCenter extends AppCompatActivity {
                                     centers.remove(0);
                                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(PatientViewCenter.this, android.R.layout.simple_list_item_1, centers);
                                     centerList.setAdapter(adapter);
+                                    centerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                        @Override
+                                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                            String selectedCenter = (String) parent.getItemAtPosition(position);
+                                            Intent batch = new Intent(PatientViewCenter.this, PatientViewBatch.class);
+                                            batch.putExtra("center", selectedCenter);
+                                            batch.putExtra("vaccine", vaccineName.getText().toString());
+                                            startActivity(batch);
+                                        }
+                                    });
                                 }
                             }
                         });
@@ -88,6 +100,16 @@ public class PatientViewCenter extends AppCompatActivity {
                                     centers.remove(0);
                                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(PatientViewCenter.this, android.R.layout.simple_list_item_1, centers);
                                     centerList.setAdapter(adapter);
+                                    centerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                        @Override
+                                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                            String selectedCenter = (String) parent.getItemAtPosition(position);
+                                            Intent batch = new Intent(PatientViewCenter.this, PatientViewBatch.class);
+                                            batch.putExtra("center", selectedCenter);
+                                            batch.putExtra("vaccine", vaccineName.getText().toString());
+                                            startActivity(batch);
+                                        }
+                                    });
                                 }
                             }
                         });
@@ -114,6 +136,16 @@ public class PatientViewCenter extends AppCompatActivity {
                                     centers.remove(0);
                                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(PatientViewCenter.this, android.R.layout.simple_list_item_1, centers);
                                     centerList.setAdapter(adapter);
+                                    centerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                        @Override
+                                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                            String selectedCenter = (String) parent.getItemAtPosition(position);
+                                            Intent batch = new Intent(PatientViewCenter.this, PatientViewBatch.class);
+                                            batch.putExtra("center", selectedCenter);
+                                            batch.putExtra("vaccine", vaccineName.getText().toString());
+                                            startActivity(batch);
+                                        }
+                                    });
                                 }
                             }
                         });
