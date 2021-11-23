@@ -17,7 +17,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -30,6 +33,9 @@ public class AppointmentCalendar extends AppCompatActivity {
     TextView batchNo;
     TextView appointmentDate;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private String batch;
+    private int quantity;
+    private String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +45,7 @@ public class AppointmentCalendar extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         String email = extras.getString("patientEmail");
         String center = extras.getString("center");
-
-        Toast.makeText(AppointmentCalendar.this, email, Toast.LENGTH_SHORT).show();
+        String vaccine = extras.getString("vaccine");
 
         PatientBatchID selectedBatch = (PatientBatchID) getIntent().getSerializableExtra("PatientBatchID");
 
@@ -51,6 +56,23 @@ public class AppointmentCalendar extends AppCompatActivity {
         appointmentDate = findViewById(R.id.date_text_view);
 
         batchNo.setText(selectedBatch.batchID);
+
+        if (vaccine.equals("PFIZER")){
+            batch = "PFIZER_BATCH";
+        }else if (vaccine.equals("SINO")){
+            batch = "SINO_BATCH";
+        }else if (vaccine.equals("ASTRA")){
+            batch = "ASTRA_BATCH";
+        }
+
+        if (selectedBatch.quantity.equals("0")){
+            Intent intent = new Intent(AppointmentCalendar.this, PatientViewBatch.class);
+            intent.putExtra("patientEmail", email);
+            intent.putExtra("center", center);
+            intent.putExtra("vaccine", vaccine);
+            Toast.makeText(AppointmentCalendar.this, "There is no quantity left", Toast.LENGTH_SHORT).show();
+            startActivity(intent);
+        }
 
         setDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,7 +98,9 @@ public class AppointmentCalendar extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         Appointment appointment = new Appointment();
-                        appointment.setVaccinationID(UUID.randomUUID().toString());
+                        String uuid = UUID.randomUUID().toString();
+                        uuid = uuid.substring(0, Math.min(uuid.length(), 6));
+                        appointment.setVaccinationID(uuid);
                         appointment.setAppointmentDate(day + "/" + month + "/" + year);
                         appointment.setCenterName(center);
                         appointment.setBatchID(batchNo.getText().toString());
@@ -113,6 +137,50 @@ public class AppointmentCalendar extends AppCompatActivity {
                                                         Toast.makeText(AppointmentCalendar.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                                                     }
                                                 });
+
+                                                db.collection(batch)
+                                                        .whereEqualTo("batchID", selectedBatch.batchID)
+                                                        //.whereEqualTo("centerName", center)
+                                                        .get()
+                                                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                                            @Override
+                                                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                                if (task.isSuccessful()){
+                                                                    for (QueryDocumentSnapshot document : task.getResult()) {
+                                                                        quantity = Integer.parseInt(document.getString("quantity"));
+                                                                    }
+                                                                    quantity = quantity - 1;
+                                                                    String strQuantity = String.valueOf(quantity);
+
+                                                                    CollectionReference deliveryRef = db.collection(batch);
+                                                                    Query nameQuery = deliveryRef.whereEqualTo("batchID", selectedBatch.batchID);
+                                                                    nameQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                                                        @Override
+                                                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                                            if (task.isSuccessful()) {
+                                                                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                                                                    id = document.getId();
+                                                                                }
+                                                                                DocumentReference ref = db.collection(batch).document(id);
+                                                                                ref.update(
+                                                                                        "quantity", strQuantity
+                                                                                ).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                                    @Override
+                                                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                                                        if (task.isSuccessful()){
+                                                                                            Toast.makeText(AppointmentCalendar.this, "Updated", Toast.LENGTH_SHORT).show();
+                                                                                        }else{
+                                                                                            Toast.makeText(AppointmentCalendar.this, "Failed", Toast.LENGTH_SHORT).show();
+                                                                                        }
+                                                                                    }
+                                                                                });
+                                                                            }
+                                                                        }
+                                                                    });
+                                                                }
+                                                            }
+                                                        });
+
                                             }else if (flag.equals("got appointment")){
                                                 Toast.makeText(AppointmentCalendar.this, "You have already made an appointment", Toast.LENGTH_SHORT).show();
                                                 Intent status = new Intent(AppointmentCalendar.this, PatientStatus.class);

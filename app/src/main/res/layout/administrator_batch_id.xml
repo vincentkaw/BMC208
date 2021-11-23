@@ -72,7 +72,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="4dp"
-                android:text="Expiry Status:"
+                android:text="Pending Quantity:"
                 android:textSize="15sp" />
             <TextView
                 android:id="@+id/text_view_quantity"
