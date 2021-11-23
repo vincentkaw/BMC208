@@ -1,19 +1,15 @@
 package com.example.bmc208;
 
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.animation.PathInterpolator;
 import android.widget.Button;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 public class PatientViewVaccine extends AppCompatActivity {
 
@@ -102,36 +98,9 @@ public class PatientViewVaccine extends AppCompatActivity {
     }
 
     public void ClickLogout(View view){
-        logoutPatient(this);
+        redirectPatientActivity(this, signup.class);
     }
 
-    public static void logoutPatient(final Activity activity) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-
-        builder.setTitle("Logout");
-
-        builder.setMessage("Are you sure you want to logout ?");
-
-        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-                activity.finishAffinity();
-
-                System.exit(0);
-            }
-        });
-        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-                dialog.dismiss();
-            }
-        });
-
-        builder.show();
-
-    }
 
     public static void redirectPatientActivity(Activity activity, Class aClass) {
         Intent intent = new Intent(activity, aClass);

@@ -118,7 +118,7 @@ public class VaccineID extends AppCompatActivity {
 
     public void ClickLogOut(View view){
         //Close app
-        AddBatchActivity.logout(this);
+        AddBatchActivity.redirectActivity(this, signup.class);
     }
 
     @Override

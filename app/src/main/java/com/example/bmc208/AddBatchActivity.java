@@ -2,7 +2,6 @@ package com.example.bmc208;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -18,7 +17,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.GravityCompat;
@@ -367,42 +365,10 @@ public class AddBatchActivity extends AppCompatActivity implements DatePickerDia
         redirectActivity(this, StaffViewVaccine.class);
     }
 
-    /*public void ClickAboutUs(View view){
-        //Redirect activity to about us
-        redirectActivity(this,);
-    }*/
+
     public void ClickLogOut(View view){
         //Close app
-        logout(this);
-    }
-
-    public static void logout(Activity activity) {
-        //Initialize alert dialog
-        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        //Set title
-        builder.setTitle("Logout");
-        //Set message
-        builder.setMessage("Are you sure you want to logout?");
-        //Positive yes button
-        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                //Finish activity
-                activity.finishAffinity();
-                //Exit app
-                System.exit(0);
-            }
-        });
-        //Negative no button
-        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                //Dismiss dialog
-                dialog.dismiss();
-            }
-        });
-        //Show dialog
-        builder.show();
+        redirectActivity(this, signup.class);
     }
 
     public static void redirectActivity(Activity activity, Class aClass) {

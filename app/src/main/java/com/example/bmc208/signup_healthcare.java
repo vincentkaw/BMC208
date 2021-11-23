@@ -1,16 +1,18 @@
 package com.example.bmc208;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -81,8 +83,56 @@ public class signup_healthcare extends AppCompatActivity {
     }
 
     private void openDialog() {
-        administrator_add_center addcenter = new administrator_add_center();
-        addcenter.show(getSupportFragmentManager(), "add center dialog");
+        final Dialog addcenter = new Dialog(signup_healthcare.this);
+        addcenter.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        addcenter.setCancelable(true);
+        addcenter.setContentView(R.layout.activity_administrator_add_center);
+
+        final EditText centername = addcenter.findViewById(R.id.edit_centername);
+        final EditText address = addcenter.findViewById(R.id.edit_address);
+        Button btnSave = addcenter.findViewById(R.id.btn_save);
+
+        btnSave.setOnClickListener(view -> {
+            AdministratorCenter administratorCenter = new AdministratorCenter();
+            administratorCenter.setCenterid(UUID.randomUUID().toString());
+            administratorCenter.setName(centername.getText().toString());
+            administratorCenter.setAddress(address.getText().toString());
+
+
+            db.collection("AdministratorCenter").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    String flag = "not same";
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        if (document.getString("name").equals(centername.getText().toString())){
+                            flag = "same";
+                            break;
+                        }
+                    }
+                    if (flag.equals("not same")){
+                        db.collection(AdministratorCenter.COLLECTION_NAME)
+                                .document()
+                                .set(administratorCenter)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
+                                        signup_healthcare.AdministratorCenter = administratorCenter;
+                                        String center = centername.getText().toString();
+                                        String addressCenter = address.getText().toString();
+                                        showDetails(center,addressCenter);
+                                        addcenter.dismiss();
+                                    }
+                                });
+                    }
+                }
+            });
+        });
+        addcenter.show();
+    }
+
+    private void showDetails(String center, String addressCenter) {
+        center_view.setText(String.format(center));
+        address_view.setText(String.format(addressCenter));
     }
 
     public void SignUpButtonClick(View view) {

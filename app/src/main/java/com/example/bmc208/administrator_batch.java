@@ -122,14 +122,9 @@ public class administrator_batch extends AppCompatActivity {
         AddBatchActivity.redirectActivity(this, StaffViewVaccine.class);
     }
 
-    /*public void ClickAboutUs(View view){
-        //Redirect activity to about us
-        AddBatchActivity.redirectActivity(this, AboutUs.class);
-    }*/
-
     public void ClickLogOut(View view){
         //Close app
-        AddBatchActivity.logout(this);
+        AddBatchActivity.redirectActivity(this, signup.class);
     }
 
     @Override
