@@ -127,7 +127,7 @@ public class PatientViewBatch extends AppCompatActivity {
     }
 
     public void ClickLogout(View view){
-        PatientViewVaccine.logoutPatient(this);
+        PatientViewVaccine.redirectPatientActivity(this, signup.class);
     }
 
     @Override

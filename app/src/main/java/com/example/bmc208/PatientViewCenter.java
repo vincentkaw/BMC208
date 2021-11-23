@@ -1,9 +1,5 @@
 package com.example.bmc208;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.drawerlayout.widget.DrawerLayout;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,7 +7,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -184,7 +183,7 @@ public class PatientViewCenter extends AppCompatActivity {
 
     public void ClickLogout(View view){
 
-        PatientViewVaccine.logoutPatient(this);
+        PatientViewVaccine.redirectPatientActivity(this, signup.class);
     }
 
     @Override
