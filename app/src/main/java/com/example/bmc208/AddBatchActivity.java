@@ -17,6 +17,7 @@ import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -24,10 +25,13 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.DialogFragment;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.DateFormat;
 import java.util.Calendar;
+import java.util.UUID;
 
 public class AddBatchActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     //Initialize variable
@@ -39,10 +43,10 @@ public class AddBatchActivity extends AppCompatActivity implements DatePickerDia
     TableLayout addBatchTable;
     Button addBatchButton;
     ConstraintLayout addBatchLayout;
-    EditText batchNo;
-    EditText quantity;
+    EditText batchNoEditText;
+    EditText quantityEditText;
     TextView vaccineID;
-    TextView expiryDate;
+    TextView expiryDateTextView;
     Button addButton;
     ImageView calendar;
 
@@ -57,6 +61,9 @@ public class AddBatchActivity extends AppCompatActivity implements DatePickerDia
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_batch);
 
+        Bundle extras = getIntent().getExtras();
+        String center = extras.getString("adminCenter");
+
         //Assign variable
         drawerLayout = findViewById(R.id.drawer_layout);
         vaccineSpinner = findViewById(R.id.vaccine_spinner);
@@ -65,10 +72,10 @@ public class AddBatchActivity extends AppCompatActivity implements DatePickerDia
         addBatchTable = findViewById(R.id.add_batch_table_layout);
         addBatchButton = findViewById(R.id.add_batch_button);
         addBatchLayout = findViewById(R.id.add_batch_constraint_layout);
-        batchNo = findViewById(R.id.batch_no_edit_text);
-        quantity = findViewById(R.id.quantity_edit_text);
+        batchNoEditText = findViewById(R.id.batch_no_edit_text);
+        quantityEditText = findViewById(R.id.quantity_edit_text);
         vaccineID = findViewById(R.id.vaccine_id_text_view);
-        expiryDate = findViewById(R.id.date_text_view);
+        expiryDateTextView = findViewById(R.id.date_text_view);
         addButton = findViewById(R.id.add_button);
         calendar = findViewById(R.id.expiry_date_Image_view);
 
@@ -144,6 +151,81 @@ public class AddBatchActivity extends AppCompatActivity implements DatePickerDia
             @Override
             public void onClick(View view) {
                 addBatchLayout.setVisibility(View.INVISIBLE);
+
+                String batchNo = batchNoEditText.getText().toString();
+                String expiryDate = expiryDateTextView.getText().toString();
+                String quantity = quantityEditText.getText().toString();
+                batchData(batchNo ,expiryDate,quantity);
+
+                if (vaccineName.getText().toString().equals("Pfizer")){
+                    Pfizer_Batch batch = new Pfizer_Batch();
+                    batch.setPfizerID(UUID.randomUUID().toString());
+                    batch.setBatchID(batchNo);
+                    batch.setCenter(center);
+                    batch.setDate(expiryDate);
+                    batch.setQuantity(quantity);
+
+                    db.collection(Pfizer_Batch.COLLECTION_NAME)
+                            .document()
+                            .set(batch)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    Toast.makeText(AddBatchActivity.this, "Batch Successfully added", Toast.LENGTH_SHORT).show();
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(AddBatchActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+                else if (vaccineName.getText().toString().equals("Sinovac")){
+                    Sino_Batch batch = new Sino_Batch();
+                    batch.setSinoID(UUID.randomUUID().toString());
+                    batch.setBatchID(batchNo);
+                    batch.setCenter(center);
+                    batch.setDate(expiryDate);
+                    batch.setQuantity(quantity);
+
+                    db.collection(Sino_Batch.COLLECTION_NAME)
+                            .document()
+                            .set(batch)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    Toast.makeText(AddBatchActivity.this, "Batch Successfully added", Toast.LENGTH_SHORT).show();
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(AddBatchActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+                else if (vaccineName.getText().toString().equals("AstraZeneca")){
+                    Astra_Batch batch = new Astra_Batch();
+                    batch.setAstraID(UUID.randomUUID().toString());
+                    batch.setBatchID(batchNo);
+                    batch.setCenter(center);
+                    batch.setDate(expiryDate);
+                    batch.setQuantity(quantity);
+
+                    db.collection(Astra_Batch.COLLECTION_NAME)
+                            .document()
+                            .set(batch)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    Toast.makeText(AddBatchActivity.this, "Batch Successfully added", Toast.LENGTH_SHORT).show();
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(AddBatchActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
             }
         });
 
@@ -240,7 +322,7 @@ public class AddBatchActivity extends AppCompatActivity implements DatePickerDia
         c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
         String currentDateString = DateFormat.getDateInstance().format(c.getTime());
 
-        expiryDate.setText(currentDateString);
+        expiryDateTextView.setText(currentDateString);
     }
 
 

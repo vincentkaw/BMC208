@@ -11,7 +11,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.PathInterpolator;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class PatientViewVaccine extends AppCompatActivity {
 
@@ -30,12 +32,19 @@ public class PatientViewVaccine extends AppCompatActivity {
         Sino = findViewById(R.id.button_patient_sino_vaccine);
         Astra = findViewById(R.id.button_patient_astra_vaccine);
 
+        Bundle extras = getIntent().getExtras();
+        String name = extras.getString("patientUsername");
+        String password = extras.getString("patientPassword");
+
+
         pfizer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String vaccine = "PFIZER";
                 Intent center = new Intent(PatientViewVaccine.this, PatientViewCenter.class);
                 center.putExtra("vaccine", vaccine);
+                center.putExtra("patientUsername", name);
+                center.putExtra("patientPassword", password);
                 startActivity(center);
             }
         });
@@ -46,6 +55,8 @@ public class PatientViewVaccine extends AppCompatActivity {
                 String vaccine ="SINO";
                 Intent center = new Intent(PatientViewVaccine.this, PatientViewCenter.class);
                 center.putExtra("vaccine", vaccine);
+                center.putExtra("patientUsername", name);
+                center.putExtra("patientPassword", password);
                 startActivity(center);
             }
         });
@@ -56,6 +67,8 @@ public class PatientViewVaccine extends AppCompatActivity {
                 String vaccine ="ASTRA";
                 Intent center = new Intent(PatientViewVaccine.this, PatientViewCenter.class);
                 center.putExtra("vaccine", vaccine);
+                center.putExtra("patientUsername", name);
+                center.putExtra("patientPassword", password);
                 startActivity(center);
             }
         });

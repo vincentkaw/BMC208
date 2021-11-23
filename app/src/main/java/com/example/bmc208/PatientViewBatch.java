@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,10 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -36,40 +35,59 @@ public class PatientViewBatch extends AppCompatActivity implements DatePickerDia
         setContentView(R.layout.activity_patient_view_batch);
 
         drawerLayout = findViewById(R.id.drawer_layout_patient);
-
-        // Create a reference to the cities collection
-        String vaccine = "PFIZER_BATCH";
-        String center = "Pfizer Center";
-
         RecyclerView recyclerView = findViewById(R.id.recycler_view_patient_batch_id);
 
-        PatientBatchID[] batches; //= {
-        //new PatientBatchID("P10000", "12/12/2021","10")
-        //};
+        String batch = "";
 
-        CollectionReference batch = db.collection(vaccine);
+        Bundle extras = getIntent().getExtras();
+        if (extras != null){
+            String center = extras.getString("center");
+            String vaccine = extras.getString("vaccine");
+            if (vaccine.equals("PFIZER")){
+                batch = "PFIZER_BATCH";
+            }else if (vaccine.equals("SINO")){
+                batch = "SINO_BATCH";
+            }else if (vaccine.equals("ASTRA")){
+                batch = "ASTRA_BATCH";
+            }
+            Toast.makeText(PatientViewBatch.this, vaccine, Toast.LENGTH_SHORT).show();
+
+            ArrayList<PatientBatchID> Batches = new ArrayList<PatientBatchID>();
+
+            db.collection(batch)
+                    .whereEqualTo("center", center)
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()){
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    Batches.add(new PatientBatchID(document.getString("batchID"), document.getString("date"),document.getString("quantity")));
+                                }
+                                PatientBatchIDAdapter adapter = new PatientBatchIDAdapter(Batches);
+                                recyclerView.setAdapter(adapter);
+                                ArrayList<PatientBatchID> Batches = new ArrayList<PatientBatchID>();
+                            }
+                        }
+                    });
+
+
+        }
+
+        // Create a reference to the cities collection
+        //String vaccine = "PFIZER_BATCH";
+        //String center = "Pfizer Center";
+
+
+
+
+
+        //CollectionReference batch = db.collection(vaccine);
 
         // Create a query against the collection.
-        Query query = batch.whereEqualTo("center", center);
+        //Query query = batch.whereEqualTo("center", center);
 
 
-        ArrayList<PatientBatchID> Batches = new ArrayList<PatientBatchID>();
-
-        db.collection(vaccine)
-                .whereEqualTo("center", center)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()){
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Batches.add(new PatientBatchID(document.getString("batchID"), document.getString("date"),document.getString("quantity")));
-                            }
-                            PatientBatchIDAdapter adapter = new PatientBatchIDAdapter(Batches);
-                            recyclerView.setAdapter(adapter);
-                        }
-                    }
-                });
 
         recyclerView.addOnItemTouchListener(new RecyclerViewItemClickListener(recyclerView, new RecyclerViewItemClickListener.OnItemClickListener() {
             @Override
