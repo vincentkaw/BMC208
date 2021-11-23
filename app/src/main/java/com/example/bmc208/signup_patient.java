@@ -92,14 +92,9 @@ public class signup_patient extends AppCompatActivity {
             username.setError("Username cannot be empty");
             return false;
         }
-        else if (!name.matches("[a-zA-Z]")){
-            username.requestFocus();
-            username.setError("Enter alphabetical character only");
-            return false;
-        }
         else if (passwords.length()<=6){
             password.requestFocus();
-            password.setError("Password minimum must have 6 characters");
+            password.setError("Password minimum must have 6 charactors");
             return false;
         }
         else if (!emails.matches("[a-zA-Z0-9._]+@[a-z]+\\.+[a-z]+")){

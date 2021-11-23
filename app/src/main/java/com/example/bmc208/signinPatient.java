@@ -4,9 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,7 +26,9 @@ public class signinPatient extends AppCompatActivity {
     EditText username;
     EditText password;
     Button btnLogin;
+    CheckBox showPassword;
 
+    SharedPreferences sharedPreferences;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     public static Patient Patient;
 
@@ -36,6 +41,7 @@ public class signinPatient extends AppCompatActivity {
         password = findViewById(R.id.enter_password);
         btnLogin = findViewById(R.id.btn_login);
         textViewSignUp = findViewById(R.id.text_signup);
+        showPassword = findViewById(R.id.show_password);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,5 +82,13 @@ public class signinPatient extends AppCompatActivity {
         });
 
 
+    }
+
+    public void ShowPasswordButtonClick(View view) {
+        if (showPassword.isChecked()) {
+            password.setTransformationMethod(null);
+        } else {
+            password.setTransformationMethod(new PasswordTransformationMethod());
+        }
     }
 }
