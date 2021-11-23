@@ -1,31 +1,25 @@
 package com.example.bmc208;
 
-import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.DatePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 
-public class PatientViewBatch extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
+public class PatientViewBatch extends AppCompatActivity {
 
     DrawerLayout drawerLayout;
     DocumentReference docref;
@@ -41,8 +35,10 @@ public class PatientViewBatch extends AppCompatActivity implements DatePickerDia
 
         String batch = "";
 
+
+
         Bundle extras = getIntent().getExtras();
-        if (extras != null){
+
             String center = extras.getString("center");
             String vaccine = extras.getString("vaccine");
             if (vaccine.equals("PFIZER")){
@@ -74,7 +70,7 @@ public class PatientViewBatch extends AppCompatActivity implements DatePickerDia
                     });
 
 
-        }
+
 
         // Create a reference to the cities collection
         //String vaccine = "PFIZER_BATCH";
@@ -94,22 +90,14 @@ public class PatientViewBatch extends AppCompatActivity implements DatePickerDia
         recyclerView.addOnItemTouchListener(new RecyclerViewItemClickListener(recyclerView, new RecyclerViewItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                DialogFragment datePicker = new DatePickerFragment();
-                datePicker.show(getSupportFragmentManager(), "date picker");
+                Intent intent = new Intent(PatientViewBatch.this, AppointmentCalendar.class);
+                //We have to pass key-value parameters
+                intent.putExtra("PatientBatchID", Batches.get(position));
+                startActivity(intent);
+
 
             }
         }));
-
-    }
-
-    @Override
-    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        Calendar c = Calendar.getInstance();
-        c.set(Calendar.YEAR, year);
-        c.set(Calendar.MONTH, month);
-        c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-        String currentDateString = DateFormat.getDateInstance().format(c.getTime());
-
 
     }
 

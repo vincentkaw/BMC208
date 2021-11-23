@@ -1,6 +1,8 @@
 package com.example.bmc208;
 
-public class PatientBatchID {
+import java.io.Serializable;
+
+public class PatientBatchID implements Serializable {
     String batchID;
     String expiryStatus;
     String quantity;

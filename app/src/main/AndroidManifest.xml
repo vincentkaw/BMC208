@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BMC208">
         <activity
+            android:name=".AppointmentCalendar"
+            android:exported="true" />
+        <activity
             android:name=".administrator_add_center"
             android:exported="true" />
         <activity

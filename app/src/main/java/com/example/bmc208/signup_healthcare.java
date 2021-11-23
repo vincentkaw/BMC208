@@ -1,24 +1,25 @@
 package com.example.bmc208;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.UUID;
+
+//import android.widget.ArrayAdapter;
+//import com.google.firebase.database.DatabaseReference;
+//import com.google.firebase.database.FirebaseDatabase;
 
 public class signup_healthcare extends AppCompatActivity {
 
@@ -33,7 +34,7 @@ public class signup_healthcare extends AppCompatActivity {
     Spinner spinner;
     TextView center_view;
     TextView address_view;
-    DatabaseReference dbref;
+    //DatabaseReference dbref;
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     public static AdministratorCenter AdministratorCenter;
@@ -54,7 +55,7 @@ public class signup_healthcare extends AppCompatActivity {
         spinner = findViewById(R.id.spinner_center);
         center_view = findViewById(R.id.view_center);
         address_view = findViewById(R.id.view_address);
-        dbref = FirebaseDatabase.getInstance().getReference("spinner");
+        //dbref = FirebaseDatabase.getInstance().getReference("spinner");
 
 //        ArrayAdapter<String> center_adapter = new ArrayAdapter<String>(signup_healthcare.this,
 //                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.center));
