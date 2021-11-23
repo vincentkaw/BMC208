@@ -5,6 +5,7 @@ public class Administrator {
     static String COLLECTION_NAME = "Administrator";
 
     private String administratorid;
+    private String centername;
     private String username;
     private String password;
     private String fullname;
@@ -15,9 +16,11 @@ public class Administrator {
         return administratorid;
     }
 
-    public void setAdministratorid(String administratorid) {
-        this.administratorid = administratorid;
-    }
+    public void setAdministratorid(String administratorid) { this.administratorid = administratorid; }
+
+    public String getCentername() { return centername; }
+
+    public void setCentername(String centername) { this.centername = centername; }
 
     public String getUsername() {
         return username;

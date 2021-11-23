@@ -1,15 +1,16 @@
 package com.example.bmc208;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -132,7 +133,7 @@ public class signup_healthcare extends AppCompatActivity {
         }
         else if (passwords.length()<=6){
             password.requestFocus();
-            password.setError("Password minimum must have more than 6 characters");
+            password.setError("Password minimum must have 6 charactors");
             return false;
         }
         else if (!emails.matches("[a-zA-Z0-9._]+@[a-z]+\\.+[a-z]+")){

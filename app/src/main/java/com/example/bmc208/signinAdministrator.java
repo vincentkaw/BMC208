@@ -26,7 +26,6 @@ public class signinAdministrator extends AppCompatActivity {
     EditText password;
     Button btnLogin;
     CheckBox showPassword;
-    CheckBox rememberMe;
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     public static Administrator Administrator;
@@ -41,7 +40,6 @@ public class signinAdministrator extends AppCompatActivity {
         btnLogin = findViewById(R.id.btn_login);
         textViewSignUp = findViewById(R.id.text_signup);
         showPassword = findViewById(R.id.show_password);
-        rememberMe = findViewById(R.id.remember);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,6 +79,14 @@ public class signinAdministrator extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void ShowPasswordButtonClick(View view) {
+        if (showPassword.isChecked()) {
+            password.setTransformationMethod(null);
+        } else {
+            password.setTransformationMethod(new PasswordTransformationMethod());
+        }
     }
 }
 
