@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:layout_gravity="center"
     tools:context=".administrator_add_center">
 
     <LinearLayout
@@ -19,22 +18,47 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="Center name"
+            android:layout_height="wrap_content"
+            android:text="Center name:"
             android:textSize="20sp"
-            android:layout_marginLeft="40dp"
             android:layout_marginTop="8dp"/>
 
         <EditText
             android:id="@+id/edit_centername"
             android:layout_width="150dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:hint="Enter centername"
             android:inputType="text"
             android:textAlignment="center" />
-
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center"
+        android:layout_below="@+id/center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Address:"
+            android:layout_marginLeft="40dp"
+            android:textSize="20sp"
+            android:layout_marginTop="8dp"/>
+
+        <EditText
+            android:id="@+id/edit_address"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:hint="Enter address"
+            android:textAlignment="center"
+            android:inputType="text"/>
+    </LinearLayout>
+
     <LinearLayout
         android:id="@+id/save"
         android:layout_width="wrap_content"
@@ -47,40 +71,10 @@
         <Button
             android:id="@+id/btn_save"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:text="Save"
             android:textSize="20sp"
-            android:layout_marginLeft="250dp"
             android:layout_marginTop="8dp" />
-
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/address"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="30dp"
-        android:layout_gravity="center"
-        android:layout_below="@+id/center">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="Address"
-            android:textSize="20sp"
-            android:layout_marginLeft="40dp"
-            android:layout_marginTop="8dp"/>
-
-        <EditText
-            android:id="@+id/edit_address"
-            android:layout_width="150dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="65dp"
-            android:hint="Enter address"
-            android:textAlignment="center"
-            android:inputType="text"/>
-
-    </LinearLayout>
-
-</RelativeLayout>
+</LinearLayout>
