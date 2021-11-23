@@ -6,18 +6,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
 public class signup_healthcare extends AppCompatActivity {
@@ -33,7 +37,6 @@ public class signup_healthcare extends AppCompatActivity {
     Spinner spinner;
     TextView center_view;
     TextView address_view;
-    DatabaseReference dbref;
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     public static AdministratorCenter AdministratorCenter;
@@ -54,12 +57,6 @@ public class signup_healthcare extends AppCompatActivity {
         spinner = findViewById(R.id.spinner_center);
         center_view = findViewById(R.id.view_center);
         address_view = findViewById(R.id.view_address);
-        dbref = FirebaseDatabase.getInstance().getReference("spinner");
-
-//        ArrayAdapter<String> center_adapter = new ArrayAdapter<String>(signup_healthcare.this,
-//                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.center));
-//        center_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        spinner.setAdapter(center_adapter);
         
         textViewAddCenter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,6 +71,31 @@ public class signup_healthcare extends AppCompatActivity {
                 startActivity(new Intent(signup_healthcare.this, signinAdministrator.class));
             }
         });
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                db.collection(AdministratorCenter.COLLECTION_NAME)
+                        .whereEqualTo("center", spinner.getSelectedItem().toString())
+                        .get()
+                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                for (QueryDocumentSnapshot documentSnapshot: task.getResult()){
+                                }
+
+                            }
+
+                        });
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+
+        });
+
     }
 
     private void openDialog() {
@@ -93,6 +115,7 @@ public class signup_healthcare extends AppCompatActivity {
         if (check==true){
             Administrator administrator = new Administrator();
             administrator.setAdministratorid(UUID.randomUUID().toString());
+            administrator.setCentername(center_view.getText().toString());
             administrator.setUsername(username.getText().toString());
             administrator.setPassword(password.getText().toString());
             administrator.setFullname(fullname.getText().toString());
