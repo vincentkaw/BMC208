@@ -27,7 +27,7 @@ public class StaffViewVaccine extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         String center = extras.getString("adminCenter");
-        Toast.makeText(StaffViewVaccine.this, center, Toast.LENGTH_SHORT).show();
+
 
         pfizerButton.setOnClickListener(view -> {
             Intent batchIDActivityIntent = new Intent(StaffViewVaccine.this, administrator_batch.class);
