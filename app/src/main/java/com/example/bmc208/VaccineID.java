@@ -1,27 +1,14 @@
 package com.example.bmc208;
 
-import androidx.annotation.NonNull;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Dialog;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.view.Window;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
-
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.UUID;
 
 public class VaccineID extends AppCompatActivity {
     //Initialize variable
@@ -46,7 +33,9 @@ public class VaccineID extends AppCompatActivity {
         recyclerView.addOnItemTouchListener(new RecyclerViewItemClickListener(recyclerView, new RecyclerViewItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-               final Dialog confirmDialog = new Dialog(VaccineID.this);
+
+
+               /*final Dialog confirmDialog = new Dialog(VaccineID.this);
                 final Dialog administeredDialog = new Dialog(VaccineID.this);
 
                 confirmDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -61,7 +50,12 @@ public class VaccineID extends AppCompatActivity {
                 Button rejectButton = confirmDialog.findViewById(R.id.reject_button);
                 Button administeredButton = administeredDialog.findViewById(R.id.administered_button);
 
-                    confirmDialog.show();
+                    confirmDialog.show();*/
+
+                Intent intent = new Intent(VaccineID.this, ConfirmAdministeredActivity.class);
+                //We have to pass key-value parameters
+                intent.putExtra("Vaccine", vaccines.get(position));
+                startActivity(intent);
 
 
             }

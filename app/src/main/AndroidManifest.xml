@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.bmc208">
 
     <application
@@ -10,11 +11,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BMC208">
         <activity
+            android:name=".ConfirmAdministeredActivity"
+            android:exported="false" />
+        <activity
             android:name=".AppointmentCalendar"
             android:exported="true" />
         <activity
             android:name=".administrator_add_center"
-            android:exported="true" />
+            android:exported="true"
+            tools:ignore="Instantiatable" />
         <activity
             android:name=".signup_healthcare"
             android:exported="true" />
