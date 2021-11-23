@@ -10,9 +10,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.UUID;
 
@@ -55,30 +59,58 @@ public class signup_patient extends AppCompatActivity {
         boolean check = validationinfo(name,passwords,emails,ic);
 
         if (check==true){
-            Patient patient = new Patient();
-            patient.setPatientid(UUID.randomUUID().toString());
-            patient.setUsername(username.getText().toString());
-            patient.setPassword(password.getText().toString());
-            patient.setEmail(email.getText().toString());
-            patient.setIc_passport(icPassword.getText().toString());
-
             db.collection(Patient.COLLECTION_NAME)
-                    .document()
-                    .set(patient)
-                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    .whereEqualTo("email", emails)
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
-                        public void onSuccess(Void unused) {
-                            signinPatient.Patient = patient;
-                            Toast.makeText(getApplicationContext(), "Data is valid", Toast.LENGTH_LONG).show();
-                            startActivity(new Intent(signup_patient.this, signinPatient.class));
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            String flag = "not registered";
+                            for (QueryDocumentSnapshot documentSnapshot: task.getResult()){
+                                if (documentSnapshot.getString("email").equals(emails)){
+                                    flag = "registered";
+                                    break;
+                                }
+                            }
+                            if (flag.equals("not registered")){
+                                Patient patient = new Patient();
+                                patient.setPatientid(UUID.randomUUID().toString());
+                                patient.setUsername(username.getText().toString());
+                                patient.setPassword(password.getText().toString());
+                                patient.setEmail(email.getText().toString());
+                                patient.setIc_passport(icPassword.getText().toString());
+
+
+
+                                db.collection(Patient.COLLECTION_NAME)
+                                        .document()
+                                        .set(patient)
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void unused) {
+                                                signinPatient.Patient = patient;
+                                                Toast.makeText(getApplicationContext(), "Data is valid", Toast.LENGTH_LONG).show();
+                                                startActivity(new Intent(signup_patient.this, signinPatient.class));
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Toast.makeText(signup_patient.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                                            }
+                                        });
+                            }else if (flag.equals("registered")){
+                                Toast.makeText(signup_patient.this, "This email has already been registered", Toast.LENGTH_LONG).show();
+                            }
+
+                            //if(Patient == null){
+                            //  Toast.makeText(signinPatient.this, "Wrong username or password", Toast.LENGTH_LONG).show();
+                            //}
                         }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(signup_patient.this, e.getMessage(), Toast.LENGTH_LONG).show();
-                        }
+
                     });
+
+
         }
         else{
             Toast.makeText(getApplicationContext(), "Check your details again", Toast.LENGTH_LONG).show();

@@ -39,6 +39,7 @@ public class PatientViewBatch extends AppCompatActivity {
 
             String center = extras.getString("center");
             String vaccine = extras.getString("vaccine");
+            String email = extras.getString("patientEmail");
             if (vaccine.equals("PFIZER")){
                 batch = "PFIZER_BATCH";
             }else if (vaccine.equals("SINO")){
@@ -91,8 +92,9 @@ public class PatientViewBatch extends AppCompatActivity {
                 Intent intent = new Intent(PatientViewBatch.this, AppointmentCalendar.class);
                 //We have to pass key-value parameters
                 intent.putExtra("PatientBatchID", Batches.get(position));
+                intent.putExtra("patientEmail", email);
+                intent.putExtra("center", center);
                 startActivity(intent);
-
             }
         }));
 
@@ -109,11 +111,19 @@ public class PatientViewBatch extends AppCompatActivity {
     }
 
     public void scheduleAppointment(View view){
-        PatientViewVaccine.redirectPatientActivity(this, PatientViewVaccine.class);
+        Bundle extras = getIntent().getExtras();
+        String email = extras.getString("patientEmail");
+        Intent back = new Intent(PatientViewBatch.this, PatientViewVaccine.class);
+        back.putExtra("patientEmail", email);
+        startActivity(back);
     }
 
     public void status(View view){
-        PatientViewVaccine.redirectPatientActivity(this, PatientStatus.class);
+        Bundle extras = getIntent().getExtras();
+        String email = extras.getString("patientEmail");
+        Intent back = new Intent(PatientViewBatch.this, PatientStatus.class);
+        back.putExtra("patientEmail", email);
+        startActivity(back);
     }
 
     public void ClickLogout(View view){

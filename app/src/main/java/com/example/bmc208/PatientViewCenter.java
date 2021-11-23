@@ -43,8 +43,7 @@ public class PatientViewCenter extends AppCompatActivity {
         if (extras != null) { //get vaccine name from selecting vaccine
             String value = extras.getString("vaccine");
             vaccineName.setText(value);
-            String name = extras.getString("patientUsername");
-            String password = extras.getString("patientPassword");
+            String email = extras.getString("patientEmail");
 
             if (vaccineName.getText().toString().equals("PFIZER")) {
                 db.collection("PFIZER_BATCH")
@@ -74,8 +73,7 @@ public class PatientViewCenter extends AppCompatActivity {
                                             Intent batch = new Intent(PatientViewCenter.this, PatientViewBatch.class);
                                             batch.putExtra("center", selectedCenter);
                                             batch.putExtra("vaccine", vaccineName.getText().toString());
-                                            batch.putExtra("patientUsername", name);
-                                            batch.putExtra("patientPassword", password);
+                                            batch.putExtra("patientEmail", email);
                                             startActivity(batch);
                                         }
                                     });
@@ -111,8 +109,7 @@ public class PatientViewCenter extends AppCompatActivity {
                                             Intent batch = new Intent(PatientViewCenter.this, PatientViewBatch.class);
                                             batch.putExtra("center", selectedCenter);
                                             batch.putExtra("vaccine", vaccineName.getText().toString());
-                                            batch.putExtra("patientUsername", name);
-                                            batch.putExtra("patientPassword", password);
+                                            batch.putExtra("patientEmail", email);
                                             startActivity(batch);
                                         }
                                     });
@@ -149,8 +146,7 @@ public class PatientViewCenter extends AppCompatActivity {
                                             Intent batch = new Intent(PatientViewCenter.this, PatientViewBatch.class);
                                             batch.putExtra("center", selectedCenter);
                                             batch.putExtra("vaccine", vaccineName.getText().toString());
-                                            batch.putExtra("patientUsername", name);
-                                            batch.putExtra("patientPassword", password);
+                                            batch.putExtra("patientEmail", email);
                                             startActivity(batch);
                                         }
                                     });
@@ -171,11 +167,19 @@ public class PatientViewCenter extends AppCompatActivity {
     }
 
     public void scheduleAppointment(View view){
-        PatientViewVaccine.redirectPatientActivity(this, PatientViewVaccine.class);
+        Bundle extras = getIntent().getExtras();
+        String email = extras.getString("patientEmail");
+        Intent back = new Intent(PatientViewCenter.this, PatientViewVaccine.class);
+        back.putExtra("patientEmail", email);
+        startActivity(back);
     }
 
     public void status(View view){
-        PatientViewVaccine.redirectPatientActivity(this, PatientStatus.class);
+        Bundle extras = getIntent().getExtras();
+        String email = extras.getString("patientEmail");
+        Intent back = new Intent(PatientViewCenter.this, PatientStatus.class);
+        back.putExtra("patientEmail", email);
+        startActivity(back);
     }
 
     public void ClickLogout(View view){

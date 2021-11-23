@@ -58,16 +58,16 @@ public class signinPatient extends AppCompatActivity {
                                     Patient patient = documentSnapshot.toObject(Patient.class);
                                     Patient = patient;
                                     Intent vaccine = new Intent(signinPatient.this, PatientViewVaccine.class);
-                                    vaccine.putExtra("patientUsername", username.getText().toString());
-                                    vaccine.putExtra("patientPassword", password.getText().toString());
+                                    String email = documentSnapshot.getString("email");
+                                    vaccine.putExtra("patientEmail", email);
                                     startActivity(vaccine);
                                     //startActivity(new Intent(signinPatient.this, PatientViewVaccine.class));
-                                    break;
+                                    //break;
                                 }
 
-                                if(Patient == null){
-                                    Toast.makeText(signinPatient.this, "Wrong username or password", Toast.LENGTH_LONG).show();
-                                }
+                                //if(Patient == null){
+                                  //  Toast.makeText(signinPatient.this, "Wrong username or password", Toast.LENGTH_LONG).show();
+                                //}
                             }
 
                         });

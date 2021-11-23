@@ -33,8 +33,7 @@ public class PatientViewVaccine extends AppCompatActivity {
         Astra = findViewById(R.id.button_patient_astra_vaccine);
 
         Bundle extras = getIntent().getExtras();
-        String name = extras.getString("patientUsername");
-        String password = extras.getString("patientPassword");
+        String email = extras.getString("patientEmail");
 
 
         pfizer.setOnClickListener(new View.OnClickListener() {
@@ -43,8 +42,7 @@ public class PatientViewVaccine extends AppCompatActivity {
                 String vaccine = "PFIZER";
                 Intent center = new Intent(PatientViewVaccine.this, PatientViewCenter.class);
                 center.putExtra("vaccine", vaccine);
-                center.putExtra("patientUsername", name);
-                center.putExtra("patientPassword", password);
+                center.putExtra("patientEmail", email);
                 startActivity(center);
             }
         });
@@ -55,8 +53,7 @@ public class PatientViewVaccine extends AppCompatActivity {
                 String vaccine ="SINO";
                 Intent center = new Intent(PatientViewVaccine.this, PatientViewCenter.class);
                 center.putExtra("vaccine", vaccine);
-                center.putExtra("patientUsername", name);
-                center.putExtra("patientPassword", password);
+                center.putExtra("patientEmail", email);
                 startActivity(center);
             }
         });
@@ -67,8 +64,7 @@ public class PatientViewVaccine extends AppCompatActivity {
                 String vaccine ="ASTRA";
                 Intent center = new Intent(PatientViewVaccine.this, PatientViewCenter.class);
                 center.putExtra("vaccine", vaccine);
-                center.putExtra("patientUsername", name);
-                center.putExtra("patientPassword", password);
+                center.putExtra("patientEmail", email);
                 startActivity(center);
             }
         });
@@ -97,8 +93,12 @@ public class PatientViewVaccine extends AppCompatActivity {
     }
 
     public void status(View view){
-        redirectPatientActivity(this, PatientStatus.class);
-        
+        //redirectPatientActivity(this, PatientStatus.class);
+        Bundle extras = getIntent().getExtras();
+        String email = extras.getString("patientEmail");
+        Intent back = new Intent(PatientViewVaccine.this, PatientStatus.class);
+        back.putExtra("patientEmail", email);
+        startActivity(back);
     }
 
     public void ClickLogout(View view){
