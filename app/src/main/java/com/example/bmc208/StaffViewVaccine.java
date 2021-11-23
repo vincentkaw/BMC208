@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class StaffViewVaccine extends AppCompatActivity {
 
@@ -23,6 +24,10 @@ public class StaffViewVaccine extends AppCompatActivity {
         pfizerButton = findViewById(R.id.button_staff_pfizer_vaccine);
         sinovacButton = findViewById(R.id.button_staff_sino_vaccine);
         astrazenecaButton = findViewById(R.id.button_staff_astra_vaccine);
+
+        Bundle extras = getIntent().getExtras();
+        String center = extras.getString("adminCenter");
+        Toast.makeText(StaffViewVaccine.this, center, Toast.LENGTH_SHORT).show();
 
         pfizerButton.setOnClickListener(view -> {
             Intent batchIDActivityIntent = new Intent(StaffViewVaccine.this, administrator_batch.class);
@@ -53,7 +58,12 @@ public class StaffViewVaccine extends AppCompatActivity {
 
     public void ClickAddBatch(View view){
         //Redirect activity to home
-        AddBatchActivity.redirectActivity(this, AddBatchActivity.class);
+        //AddBatchActivity.redirectActivity(this, AddBatchActivity.class);
+        Bundle extras = getIntent().getExtras();
+        String center = extras.getString("adminCenter");
+        Intent adminCenter = new Intent(StaffViewVaccine.this, AddBatchActivity.class);
+        adminCenter.putExtra("adminCenter", center);
+        startActivity(adminCenter);
     }
 
     public void ClickViewVaccine(View view){
