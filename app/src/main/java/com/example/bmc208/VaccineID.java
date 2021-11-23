@@ -1,12 +1,21 @@
 package com.example.bmc208;
 
 import android.content.Intent;
+import android.hardware.camera2.TotalCaptureResult;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
@@ -19,16 +28,33 @@ public class VaccineID extends AppCompatActivity {
         setContentView(R.layout.activity_vaccine_id);
         //Assign variable
         drawerLayout = findViewById(R.id.drawer_layout);
+        BatchID selectedBatchID = (BatchID) getIntent().getSerializableExtra("BatchID");
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        Bundle extras = getIntent().getExtras();
+        String center = extras.getString("adminCenter");
+        String vaccine = extras.getString("vaccine");
 
         RecyclerView recyclerView = findViewById(R.id.recycler_view_vaccine_id);
 
-        ArrayList<Vaccine>vaccines = new ArrayList<Vaccine>();
-        vaccines.add(new Vaccine("P0001", "12/12/12", "", "Pending"));
-        vaccines.add(new Vaccine("P0001", "12/12/12", "", "Confirmed"));
-        vaccines.add(new Vaccine("P0001", "12/12/12", "", "Administered"));
+        ArrayList<Vaccine> vaccines = new ArrayList<Vaccine>();
 
-        VaccineAdapter adapter = new VaccineAdapter(vaccines);
-        recyclerView.setAdapter(adapter);
+        db.collection("Appointment")
+                .whereEqualTo("batchID", selectedBatchID.batchID)
+                //.whereEqualTo("centerName", center)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()){
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                vaccines.add(new Vaccine(document.getString("vaccinationID"), document.getString("appointmentDate"),document.getString("remarks"), document.getString("status")));
+                            }
+                            VaccineAdapter adapter = new VaccineAdapter(vaccines);
+                            recyclerView.setAdapter(adapter);
+                        }
+                    }
+                });
 
         recyclerView.addOnItemTouchListener(new RecyclerViewItemClickListener(recyclerView, new RecyclerViewItemClickListener.OnItemClickListener() {
             @Override
@@ -55,6 +81,8 @@ public class VaccineID extends AppCompatActivity {
                 Intent intent = new Intent(VaccineID.this, ConfirmAdministeredActivity.class);
                 //We have to pass key-value parameters
                 intent.putExtra("Vaccine", vaccines.get(position));
+                intent.putExtra("adminCenter", center);
+                intent.putExtra("vaccine", vaccine);
                 startActivity(intent);
 
 

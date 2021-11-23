@@ -28,17 +28,25 @@ public class StaffViewVaccine extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         String center = extras.getString("adminCenter");
 
+        Toast.makeText(StaffViewVaccine.this, center, Toast.LENGTH_SHORT).show();
+
 
         pfizerButton.setOnClickListener(view -> {
             Intent batchIDActivityIntent = new Intent(StaffViewVaccine.this, administrator_batch.class);
+            batchIDActivityIntent.putExtra("vaccine", "pfizer");
+            batchIDActivityIntent.putExtra("adminCenter", center);
             startActivity(batchIDActivityIntent);
         });
         sinovacButton.setOnClickListener(view -> {
             Intent batchIDActivityIntent = new Intent(StaffViewVaccine.this, administrator_batch.class);
+            batchIDActivityIntent.putExtra("vaccine", "sino");
+            batchIDActivityIntent.putExtra("adminCenter", center);
             startActivity(batchIDActivityIntent);
         });
         astrazenecaButton.setOnClickListener(view -> {
             Intent batchIDActivityIntent = new Intent(StaffViewVaccine.this, administrator_batch.class);
+            batchIDActivityIntent.putExtra("vaccine", "astra");
+            batchIDActivityIntent.putExtra("adminCenter", center);
             startActivity(batchIDActivityIntent);
         });
 

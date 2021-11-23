@@ -69,8 +69,6 @@ public class PatientViewBatch extends AppCompatActivity {
                     });
 
 
-
-
         // Create a reference to the cities collection
         //String vaccine = "PFIZER_BATCH";
         //String center = "Pfizer Center";
@@ -94,6 +92,7 @@ public class PatientViewBatch extends AppCompatActivity {
                 intent.putExtra("PatientBatchID", Batches.get(position));
                 intent.putExtra("patientEmail", email);
                 intent.putExtra("center", center);
+                intent.putExtra("vaccine", vaccine);
                 startActivity(intent);
             }
         }));

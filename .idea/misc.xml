@@ -3,50 +3,25 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/BIT208/BMC208/app/src/main/res/layout/activity_administrator_add_center.xml" value="0.25416666666666665" />
-        <entry key="..\:/BIT208/BMC208/app/src/main/res/layout/activity_appoinment_calendar.xml" value="0.25416666666666665" />
-        <entry key="..\:/BIT208/BMC208/app/src/main/res/layout/activity_confirm_administered.xml" value="0.24010416666666667" />
         <entry key="..\:/BIT208/BMC208/app/src/main/res/layout/activity_main.xml" value="0.264" />
-        <entry key="..\:/BIT208/BMC208/app/src/main/res/layout/activity_patient_view_center.xml" value="0.25416666666666665" />
-        <entry key="..\:/BIT208/BMC208/app/src/main/res/layout/activity_patient_view_vaccine.xml" value="0.25" />
-        <entry key="..\:/BIT208/BMC208/app/src/main/res/layout/activity_signin_administrator.xml" value="0.25416666666666665" />
-        <entry key="..\:/BIT208/BMC208/app/src/main/res/layout/activity_signup_healthcare.xml" value="0.25416666666666665" />
-        <entry key="..\:/BIT208/BMC208/app/src/main/res/layout/administered_dialog.xml" value="0.25" />
-        <entry key="..\:/BIT208/BMC208/app/src/main/res/layout/confirm_dialog.xml" value="0.25" />
-        <entry key="..\:/BMC208/BMC2081/app/src/main/res/layout/activity_add_batch.xml" value="0.29814814814814816" />
-        <entry key="..\:/BMC208/BMC2081/app/src/main/res/layout/activity_administrator_batch.xml" value="0.29814814814814816" />
-        <entry key="..\:/BMC208/BMC2081/app/src/main/res/layout/activity_patient_status.xml" value="0.371875" />
-        <entry key="..\:/BMC208/BMC2081/app/src/main/res/layout/activity_patient_view_batch.xml" value="0.29814814814814816" />
-        <entry key="..\:/BMC208/BMC2081/app/src/main/res/layout/activity_patient_view_center.xml" value="0.371875" />
-        <entry key="..\:/BMC208/BMC2081/app/src/main/res/layout/activity_patient_view_vaccine.xml" value="0.371875" />
         <entry key="..\:/BMC208/BMC2081/app/src/main/res/layout/activity_signin_healthcare.xml" value="0.3578125" />
         <entry key="..\:/BMC208/BMC2081/app/src/main/res/layout/activity_signin_patient.xml" value="0.371875" />
         <entry key="..\:/BMC208/BMC2081/app/src/main/res/layout/activity_signup_healthcare.xml" value="0.3578125" />
         <entry key="..\:/BMC208/BMC2081/app/src/main/res/layout/activity_signup_patient.xml" value="0.371875" />
-        <entry key="..\:/BMC208/BMC2081/app/src/main/res/layout/activity_staff_view_vaccine.xml" value="0.371875" />
-        <entry key="..\:/BMC208/BMC2081/app/src/main/res/layout/activity_vaccine_id.xml" value="0.371875" />
-        <entry key="..\:/BMC208/BMC2081/app/src/main/res/layout/add_batch_dialog.xml" value="0.371875" />
-        <entry key="..\:/BMC208/BMC2081/app/src/main/res/layout/administrator_batch_id.xml" value="0.29814814814814816" />
-        <entry key="..\:/BMC208/BMC2081/app/src/main/res/layout/main_nav_drawer.xml" value="0.371875" />
-        <entry key="..\:/BMC208/BMC2081/app/src/main/res/layout/main_toolbar.xml" value="0.29814814814814816" />
-        <entry key="..\:/BMC208/BMC2081/app/src/main/res/layout/nav_drawer_patient.xml" value="0.371875" />
-        <entry key="..\:/BMC208/BMC2081/app/src/main/res/layout/patient_batches.xml" value="0.29814814814814816" />
-        <entry key="..\:/BMC208/BMC2081/app/src/main/res/layout/staff_vaccine_batch_id.xml" value="0.371875" />
         <entry key="..\:/Users/User/Desktop/Android/BMC208/app/src/main/res/drawable/ic_about_us.xml" value="0.22135416666666666" />
         <entry key="..\:/Users/User/Desktop/Android/BMC208/app/src/main/res/drawable/ic_add.xml" value="0.22135416666666666" />
         <entry key="..\:/Users/User/Desktop/Android/BMC208/app/src/main/res/drawable/ic_baseline_android_24.xml" value="0.22135416666666666" />
         <entry key="..\:/Users/User/Desktop/Android/BMC208/app/src/main/res/drawable/ic_dashboard.xml" value="0.22135416666666666" />
         <entry key="..\:/Users/User/Desktop/Android/BMC208/app/src/main/res/layout/activity_add_batch.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/User/Desktop/Android/BMC208/app/src/main/res/layout/activity_administrator_batch.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/Desktop/Android/BMC208/app/src/main/res/layout/activity_dashboard.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/Desktop/Android/BMC208/app/src/main/res/layout/activity_main.xml" value="0.3574074074074074" />
         <entry key="..\:/Users/User/Desktop/Android/BMC208/app/src/main/res/layout/activity_patient_status.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/Desktop/Android/BMC208/app/src/main/res/layout/activity_patient_view_batch.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/Desktop/Android/BMC208/app/src/main/res/layout/activity_patient_view_center.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/Desktop/Android/BMC208/app/src/main/res/layout/activity_patient_view_vaccine.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/User/Desktop/Android/BMC208/app/src/main/res/layout/activity_signup_healthcare.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/Desktop/Android/BMC208/app/src/main/res/layout/activity_staff_view_vaccine.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/User/Desktop/Android/BMC208/app/src/main/res/layout/add_batch_dialog.xml" value="0.3472222222222222" />
-        <entry key="..\:/Users/User/Desktop/Android/BMC208/app/src/main/res/layout/administrator_batch_id.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/User/Desktop/Android/BMC208/app/src/main/res/layout/administrator_batch_id.xml" value="0.34814814814814815" />
         <entry key="..\:/Users/User/Desktop/Android/BMC208/app/src/main/res/layout/main_nav_drawer.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/Desktop/Android/BMC208/app/src/main/res/layout/main_toolbar.xml" value="0.33" />
         <entry key="..\:/Users/User/Desktop/Android/BMC208/app/src/main/res/layout/nav_drawer_patient.xml" value="0.36666666666666664" />

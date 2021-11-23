@@ -24,6 +24,7 @@ public class signinAdministrator extends AppCompatActivity {
     TextView textViewSignUp;
     EditText username;
     EditText password;
+    TextView center;
     Button btnLogin;
     CheckBox showPassword;
 
@@ -40,6 +41,7 @@ public class signinAdministrator extends AppCompatActivity {
         btnLogin = findViewById(R.id.btn_login);
         textViewSignUp = findViewById(R.id.text_signup);
         showPassword = findViewById(R.id.show_password);
+        center = findViewById(R.id.text);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,7 +59,7 @@ public class signinAdministrator extends AppCompatActivity {
                                     Administrator = administrator;
                                     //String center = documentSnapshot.getString("");
                                     Intent adminCenter = new Intent(signinAdministrator.this, StaffViewVaccine.class);
-                                    adminCenter.putExtra("adminCenter", "Wong Hospital");
+                                    adminCenter.putExtra("adminCenter", "Pfizer Center");
                                     startActivity(adminCenter);
                                     //startActivity(new Intent(signinAdministrator.this, StaffViewVaccine.class));
                                     break;
