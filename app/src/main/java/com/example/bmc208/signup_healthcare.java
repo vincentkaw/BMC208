@@ -134,7 +134,7 @@ public class signup_healthcare extends AppCompatActivity {
         }
         else if (passwords.length()<=6){
             password.requestFocus();
-            password.setError("Password minimum must have 6 charactors");
+            password.setError("Password minimum must have more than 6 characters");
             return false;
         }
         else if (!emails.matches("[a-zA-Z0-9._]+@[a-z]+\\.+[a-z]+")){

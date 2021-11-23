@@ -15,9 +15,13 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.UUID;
 
@@ -52,15 +56,33 @@ public class administrator_add_center extends AppCompatDialogFragment {
                         administratorCenter.setName(editTextCenterName.getText().toString());
                         administratorCenter.setAddress(editTextAddress.getText().toString());
 
-                        db.collection(AdministratorCenter.COLLECTION_NAME)
-                                .document()
-                                .set(administratorCenter)
-                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void unused) {
-                                        signup_healthcare.AdministratorCenter = administratorCenter;
+
+                        db.collection("AdministratorCenter").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                String flag = "not same";
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                        if (document.getString("name").equals(editTextCenterName.getText().toString())){
+                                            flag = "same";
+                                            break;
+                                        }
                                     }
-                                });
+                                if (flag.equals("not same")){
+                                    db.collection(AdministratorCenter.COLLECTION_NAME)
+                                            .document()
+                                            .set(administratorCenter)
+                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void unused) {
+                                                    signup_healthcare.AdministratorCenter = administratorCenter;
+                                                }
+                                            });
+                                    }
+                                }
+
+                        });
+
+
                     }
                 });
 

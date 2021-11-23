@@ -51,7 +51,11 @@ public class signinPatient extends AppCompatActivity {
                                 for (QueryDocumentSnapshot documentSnapshot: task.getResult()){
                                     Patient patient = documentSnapshot.toObject(Patient.class);
                                     Patient = patient;
-                                    startActivity(new Intent(signinPatient.this, PatientViewVaccine.class));
+                                    Intent vaccine = new Intent(signinPatient.this, PatientViewVaccine.class);
+                                    vaccine.putExtra("patientUsername", username.getText().toString());
+                                    vaccine.putExtra("patientPassword", password.getText().toString());
+                                    startActivity(vaccine);
+                                    //startActivity(new Intent(signinPatient.this, PatientViewVaccine.class));
                                     break;
                                 }
 

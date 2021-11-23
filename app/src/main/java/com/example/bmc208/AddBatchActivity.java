@@ -61,6 +61,9 @@ public class AddBatchActivity extends AppCompatActivity implements DatePickerDia
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_batch);
 
+        Bundle extras = getIntent().getExtras();
+        String center = extras.getString("adminCenter");
+
         //Assign variable
         drawerLayout = findViewById(R.id.drawer_layout);
         vaccineSpinner = findViewById(R.id.vaccine_spinner);
@@ -158,7 +161,7 @@ public class AddBatchActivity extends AppCompatActivity implements DatePickerDia
                     Pfizer_Batch batch = new Pfizer_Batch();
                     batch.setPfizerID(UUID.randomUUID().toString());
                     batch.setBatchID(batchNo);
-                    batch.setCenter("Test Center");
+                    batch.setCenter(center);
                     batch.setDate(expiryDate);
                     batch.setQuantity(quantity);
 
@@ -181,7 +184,7 @@ public class AddBatchActivity extends AppCompatActivity implements DatePickerDia
                     Sino_Batch batch = new Sino_Batch();
                     batch.setSinoID(UUID.randomUUID().toString());
                     batch.setBatchID(batchNo);
-                    batch.setCenter("Fake Center");
+                    batch.setCenter(center);
                     batch.setDate(expiryDate);
                     batch.setQuantity(quantity);
 
@@ -204,7 +207,7 @@ public class AddBatchActivity extends AppCompatActivity implements DatePickerDia
                     Astra_Batch batch = new Astra_Batch();
                     batch.setAstraID(UUID.randomUUID().toString());
                     batch.setBatchID(batchNo);
-                    batch.setCenter("Fake Center");
+                    batch.setCenter(center);
                     batch.setDate(expiryDate);
                     batch.setQuantity(quantity);
 
