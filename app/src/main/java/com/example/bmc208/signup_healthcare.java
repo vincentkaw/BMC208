@@ -12,11 +12,15 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.UUID;
 
@@ -82,7 +86,6 @@ public class signup_healthcare extends AppCompatActivity {
     }
 
     public void SignUpButtonClick(View view) {
-
         String name = username.getText().toString();
         String passwords = password.getText().toString();
         String fulln = fullname.getText().toString();
@@ -91,30 +94,55 @@ public class signup_healthcare extends AppCompatActivity {
         boolean check = validationinfo(name,passwords,fulln,emails,id);
 
         if (check==true){
-            Administrator administrator = new Administrator();
-            administrator.setAdministratorid(UUID.randomUUID().toString());
-            administrator.setUsername(username.getText().toString());
-            administrator.setPassword(password.getText().toString());
-            administrator.setFullname(fullname.getText().toString());
-            administrator.setEmail(email.getText().toString());
-            administrator.setStaffid(staffid.getText().toString());
 
             db.collection(Administrator.COLLECTION_NAME)
-                    .document()
-                    .set(administrator)
-                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    .whereEqualTo("email", emails)
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
-                        public void onSuccess(Void unused) {
-                            signinAdministrator.Administrator = administrator;
-                            Toast.makeText(getApplicationContext(), "Data is valid", Toast.LENGTH_LONG).show();
-                            startActivity(new Intent(signup_healthcare.this, signinAdministrator.class));
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            String flag = "not registered";
+                            for (QueryDocumentSnapshot documentSnapshot: task.getResult()){
+                                if (documentSnapshot.getString("email").equals(emails)){
+                                    flag = "registered";
+                                    break;
+                                }
+                            }
+                            if (flag.equals("not registered")){
+                                Administrator administrator = new Administrator();
+                                administrator.setAdministratorid(UUID.randomUUID().toString());
+                                administrator.setUsername(username.getText().toString());
+                                administrator.setPassword(password.getText().toString());
+                                administrator.setFullname(fullname.getText().toString());
+                                administrator.setEmail(email.getText().toString());
+                                administrator.setStaffid(staffid.getText().toString());
+
+                                db.collection(Administrator.COLLECTION_NAME)
+                                        .document()
+                                        .set(administrator)
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void unused) {
+                                                signinAdministrator.Administrator = administrator;
+                                                Toast.makeText(getApplicationContext(), "Data is valid", Toast.LENGTH_LONG).show();
+                                                startActivity(new Intent(signup_healthcare.this, signinPatient.class));
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Toast.makeText(signup_healthcare.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                                            }
+                                        });
+                            }else if (flag.equals("registered")){
+                                Toast.makeText(signup_healthcare.this, "This email has already been registered", Toast.LENGTH_LONG).show();
+                            }
+
+                            //if(Patient == null){
+                            //  Toast.makeText(signinPatient.this, "Wrong username or password", Toast.LENGTH_LONG).show();
+                            //}
                         }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(signup_healthcare.this, e.getMessage(), Toast.LENGTH_LONG).show();
-                        }
+
                     });
         }
         else{
