@@ -25,10 +25,6 @@ public class VaccineAdapter extends RecyclerView.Adapter<VaccineAdapter.VaccineV
     public VaccineViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.staff_vaccine_batch_id, parent, false);
-
-
-
-
         return new VaccineAdapter.VaccineViewHolder(view);
     }
 
