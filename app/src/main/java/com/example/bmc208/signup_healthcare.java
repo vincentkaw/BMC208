@@ -1,16 +1,18 @@
 package com.example.bmc208;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -81,8 +83,30 @@ public class signup_healthcare extends AppCompatActivity {
     }
 
     private void openDialog() {
-        administrator_add_center addcenter = new administrator_add_center();
-        addcenter.show(getSupportFragmentManager(), "add center dialog");
+        final Dialog addcenter = new Dialog(signup_healthcare.this);
+        addcenter.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        addcenter.setCancelable(true);
+        addcenter.setContentView(R.layout.activity_administrator_add_center);
+
+        final EditText centername = addcenter.findViewById(R.id.edit_centername);
+        final EditText address = addcenter.findViewById(R.id.edit_address);
+        Button btnSave = addcenter.findViewById(R.id.btn_save);
+
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String center = centername.getText().toString();
+                String addressCenter = address.getText().toString();
+                showDetails(center,addressCenter);
+                addcenter.dismiss();
+            }
+        });
+        addcenter.show();
+    }
+
+    private void showDetails(String center, String addressCenter) {
+        center_view.setText(String.format(center));
+        address_view.setText(String.format(addressCenter));
     }
 
     public void SignUpButtonClick(View view) {
