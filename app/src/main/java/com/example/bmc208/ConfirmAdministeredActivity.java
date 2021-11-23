@@ -16,6 +16,7 @@ public class ConfirmAdministeredActivity extends AppCompatActivity {
     TextView manufacturer;
     TextView vaccineName;
     TextView name;
+    TextView vaccineID;
     TextView ic;
     TextView remarksText;
     EditText remarks;
@@ -30,6 +31,7 @@ public class ConfirmAdministeredActivity extends AppCompatActivity {
 
         Vaccine selectedVaccine = (Vaccine) getIntent().getSerializableExtra("Vaccine");
 
+        vaccineID = findViewById(R.id.vaccine_id_text_view);
         batchID = findViewById(R.id.batch_id_text_view);
         expiryDate = findViewById(R.id.expiry_date_text_view);
         manufacturer = findViewById(R.id.manufacture_name_text_view);
@@ -42,8 +44,9 @@ public class ConfirmAdministeredActivity extends AppCompatActivity {
         confirm = findViewById(R.id.confirm_button);
         administered = findViewById(R.id.administered_button);
 
-        String status = null;
+        vaccineID.setText(selectedVaccine.vaccineID);
 
+        String status = null;
         status = selectedVaccine.status;
 
         if (status.equals("Pending")){
@@ -79,7 +82,6 @@ public class ConfirmAdministeredActivity extends AppCompatActivity {
                 startActivity(vaccineIDIntent);
             }
         });
-
 
     }
 }
