@@ -109,7 +109,7 @@ public class AppointmentCalendar extends AppCompatActivity {
                 int month = datePicker.getMonth() + 1;
                 int year = datePicker.getYear();
 
-                appointmentDate.setText(String.valueOf("Appoinment Date: " + day + "/" + month + "/" + year));
+                appointmentDate.setText(String.valueOf("Appointment Date: " + day + "/" + month + "/" + year));
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(AppointmentCalendar.this);
                 builder.setCancelable(true);
