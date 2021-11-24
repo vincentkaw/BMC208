@@ -174,6 +174,9 @@ public class AppointmentCalendar extends AppCompatActivity {
                                                                                         }
                                                                                     }
                                                                                 });
+                                                                                Intent status = new Intent(AppointmentCalendar.this, PatientStatus.class);
+                                                                                status.putExtra("patientEmail", email);
+                                                                                startActivity(status);
                                                                             }
                                                                         }
                                                                     });
@@ -190,11 +193,6 @@ public class AppointmentCalendar extends AppCompatActivity {
                                         }
                                     }
                                 });
-
-
-                        Intent status = new Intent(AppointmentCalendar.this, PatientStatus.class);
-                        status.putExtra("patientEmail", email);
-                        startActivity(status);
 
                         //Intent statusActivityIntent = new Intent(AppointmentCalendar.this, PatientStatus.class);
                         //startActivity(statusActivityIntent);
