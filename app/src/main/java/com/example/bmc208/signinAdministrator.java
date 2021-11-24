@@ -1,8 +1,5 @@
 package com.example.bmc208;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.PasswordTransformationMethod;
@@ -12,6 +9,9 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -57,7 +57,7 @@ public class signinAdministrator extends AppCompatActivity {
                                     Administrator administrator = documentSnapshot.toObject(Administrator.class);
                                     Administrator = administrator;
                                     String center = documentSnapshot.getString("centername");
-                                    Intent adminCenter = new Intent(signinAdministrator.this, StaffViewVaccine.class);
+                                    Intent adminCenter = new Intent(signinAdministrator.this, AddBatchActivity.class);
                                     adminCenter.putExtra("adminCenter", center);
                                     startActivity(adminCenter);
                                     //startActivity(new Intent(signinAdministrator.this, StaffViewVaccine.class));

@@ -19,6 +19,7 @@ tools:context=".PatientViewVaccine"
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/blue"
         android:layout_gravity="center"
         >
 
