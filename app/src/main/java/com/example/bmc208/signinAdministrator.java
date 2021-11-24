@@ -57,9 +57,9 @@ public class signinAdministrator extends AppCompatActivity {
                                 for (QueryDocumentSnapshot documentSnapshot: task.getResult()){
                                     Administrator administrator = documentSnapshot.toObject(Administrator.class);
                                     Administrator = administrator;
-                                    //String center = documentSnapshot.getString("");
+                                    String center = documentSnapshot.getString("centername");
                                     Intent adminCenter = new Intent(signinAdministrator.this, StaffViewVaccine.class);
-                                    adminCenter.putExtra("adminCenter", "Pfizer Center");
+                                    adminCenter.putExtra("adminCenter", center);
                                     startActivity(adminCenter);
                                     //startActivity(new Intent(signinAdministrator.this, StaffViewVaccine.class));
                                     break;

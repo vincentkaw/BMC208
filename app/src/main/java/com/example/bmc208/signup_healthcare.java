@@ -151,11 +151,18 @@ public class signup_healthcare extends AppCompatActivity {
     }
 
     public void SignUpButtonClick(View view) {
+        final Dialog addcenter = new Dialog(signup_healthcare.this);
+        addcenter.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        addcenter.setCancelable(true);
+        addcenter.setContentView(R.layout.activity_administrator_add_center);
+        final EditText centername = addcenter.findViewById(R.id.edit_centername);
+
         String name = username.getText().toString();
         String passwords = password.getText().toString();
         String fulln = fullname.getText().toString();
         String emails = email.getText().toString();
         String id = staffid.getText().toString();
+        String center = center_view.getText().toString();
         boolean check = validationinfo(name,passwords,fulln,emails,id);
 
         if (check==true){
@@ -181,6 +188,7 @@ public class signup_healthcare extends AppCompatActivity {
                                 administrator.setFullname(fullname.getText().toString());
                                 administrator.setEmail(email.getText().toString());
                                 administrator.setStaffid(staffid.getText().toString());
+                                administrator.setCentername(center);
 
                                 db.collection(Administrator.COLLECTION_NAME)
                                         .document()
