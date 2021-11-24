@@ -150,43 +150,48 @@ public class signup_healthcare extends AppCompatActivity {
         Button btnSave = addcenter.findViewById(R.id.btn_save);
 
         btnSave.setOnClickListener(view -> {
-            String center = centername.getText().toString();
-            String addressCenter = address.getText().toString();
-            showDetails(center,addressCenter);
-            addcenter.dismiss();
-//            AdministratorCenter administratorCenter = new AdministratorCenter();
-//            administratorCenter.setCenterid(UUID.randomUUID().toString());
-//            administratorCenter.setName(centername.getText().toString());
-//            administratorCenter.setAddress(address.getText().toString());
+//            String center = centername.getText().toString();
+//            String addressCenter = address.getText().toString();
+//            showDetails(center,addressCenter);
+//            addcenter.dismiss();
+            AdministratorCenter administratorCenter = new AdministratorCenter();
+            administratorCenter.setCenterid(UUID.randomUUID().toString());
+            administratorCenter.setName(centername.getText().toString());
+            administratorCenter.setAddress(address.getText().toString());
+
+            if (centername.getText().toString().equals("") || address.getText().toString().equals("")){
+                Toast.makeText(signup_healthcare.this, "Please fill in the details of the center fully", Toast.LENGTH_SHORT).show();
+            }else {
+                db.collection("AdministratorCenter").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        String flag = "not same";
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            if (document.getString("name").equals(centername.getText().toString())){
+                                flag = "same";
+                                break;
+                            }
+                        }
+                        if (flag.equals("not same")){
+                            db.collection(AdministratorCenter.COLLECTION_NAME)
+                                    .document()
+                                    .set(administratorCenter)
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void unused) {
+                                            signup_healthcare.AdministratorCenter = administratorCenter;
+                                            String center = centername.getText().toString();
+                                            String addressCenter = address.getText().toString();
+                                            showDetails(center,addressCenter);
+                                            addcenter.dismiss();
+                                        }
+                                    });
+                        }
+                    }
+                });
+            }
 
 
-//            db.collection("AdministratorCenter").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//                @Override
-//                public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                    String flag = "not same";
-//                    for (QueryDocumentSnapshot document : task.getResult()) {
-//                        if (document.getString("name").equals(centername.getText().toString())){
-//                            flag = "same";
-//                            break;
-//                        }
-//                    }
-//                    if (flag.equals("not same")){
-//                        db.collection(AdministratorCenter.COLLECTION_NAME)
-//                                .document()
-//                                .set(administratorCenter)
-//                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-//                                    @Override
-//                                    public void onSuccess(Void unused) {
-//                                        signup_healthcare.AdministratorCenter = administratorCenter;
-//                                        String center = centername.getText().toString();
-//                                        String addressCenter = address.getText().toString();
-//                                        showDetails(center,addressCenter);
-//                                        addcenter.dismiss();
-//                                    }
-//                                });
-//                    }
-//                }
-//            });
         });
         addcenter.show();
     }
@@ -210,7 +215,7 @@ public class signup_healthcare extends AppCompatActivity {
         String emails = email.getText().toString();
         String id = staffid.getText().toString();
         String center = center_view.getText().toString();
-        boolean check = validationinfo(name,passwords,fulln,emails,id);
+        boolean check = validationinfo(name,passwords,fulln,emails,id, center);
 
         if (check==true){
 
@@ -272,9 +277,14 @@ public class signup_healthcare extends AppCompatActivity {
 
     }
 
-    private boolean validationinfo(String name, String passwords, String fulln, String emails, String id) {
+    private boolean validationinfo(String name, String passwords, String fulln, String emails, String id, String center) {
 
-        if (name.length()==0){
+        if (center.length()==0){
+            center_view.requestFocus();
+            center_view.setError("You must select the center");
+            return false;
+        }
+        else if (name.length()==0){
             username.requestFocus();
             username.setError("Username cannot be empty");
             return false;
@@ -302,6 +312,10 @@ public class signup_healthcare extends AppCompatActivity {
         else {
             return true;
         }
-    }
+
+
+        }
+
+
 
 }
