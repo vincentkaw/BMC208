@@ -158,7 +158,9 @@ public class AddBatchActivity extends AppCompatActivity {
                 String quantity = quantityEditText.getText().toString();
                 batchData(batchNo ,expiryDate,quantity);
 
-                if (vaccineName.getText().toString().equals("Pfizer")){
+                boolean validate = validationAddBatch(batchNo, expiryDate ,quantity);
+
+                if (vaccineName.getText().toString().equals("Pfizer") && validate == true){
                     Pfizer_Batch batch = new Pfizer_Batch();
                     batch.setPfizerID(UUID.randomUUID().toString());
                     batch.setBatchID(batchNo);
@@ -198,7 +200,7 @@ public class AddBatchActivity extends AppCompatActivity {
                         }
                     });
                 }
-                else if (vaccineName.getText().toString().equals("Sinovac")){
+                else if (vaccineName.getText().toString().equals("Sinovac") && validate == true){
                     Sino_Batch batch = new Sino_Batch();
                     batch.setSinoID(UUID.randomUUID().toString());
                     batch.setBatchID(batchNo);
@@ -240,7 +242,7 @@ public class AddBatchActivity extends AppCompatActivity {
 
 
                 }
-                else if (vaccineName.getText().toString().equals("AstraZeneca")){
+                else if (vaccineName.getText().toString().equals("AstraZeneca") && validate == true){
                     Astra_Batch batch = new Astra_Batch();
                     batch.setAstraID(UUID.randomUUID().toString());
                     batch.setBatchID(batchNo);
@@ -284,6 +286,28 @@ public class AddBatchActivity extends AppCompatActivity {
                 }
             }
         });
+
+
+
+    }
+
+    private boolean validationAddBatch(String batchNo, String expiryDate, String quantity) {
+
+        if (batchNo.length() == 0) {
+            batchNoEditText.requestFocus();
+            batchNoEditText.setError("Batch No is not set");
+            return false;
+        } else if (expiryDate.equals("Date")) {
+            expiryDateTextView.requestFocus();
+            expiryDateTextView.setError("Date is not set");
+            return false;
+        } else if (quantity.length() == 0) {
+            quantityEditText.requestFocus();
+            quantityEditText.setError("Quantity is empty");
+            return false;
+        }else {
+            return true;
+        }
 
     }
 
