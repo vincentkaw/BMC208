@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -20,10 +21,12 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
 public class signup_healthcare extends AppCompatActivity {
@@ -41,6 +44,10 @@ public class signup_healthcare extends AppCompatActivity {
     TextView address_view;
     DatabaseReference dbref;
 
+    ValueEventListener listener;
+    ArrayList<String> list;
+    ArrayAdapter<String> adapter;
+
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     public static AdministratorCenter AdministratorCenter;
 
@@ -57,10 +64,13 @@ public class signup_healthcare extends AppCompatActivity {
         textViewSignIn = findViewById(R.id.text_signup);
         textViewAddCenter = findViewById(R.id.view_add_center);
 
-        spinner = findViewById(R.id.spinner_center);
         center_view = findViewById(R.id.view_center);
         address_view = findViewById(R.id.view_address);
-        dbref = FirebaseDatabase.getInstance().getReference("spinner");
+
+        spinner = findViewById(R.id.spinner_center);
+        dbref = FirebaseDatabase.getInstance().getReference("name");
+
+
 
 //        ArrayAdapter<String> center_adapter = new ArrayAdapter<String>(signup_healthcare.this,
 //                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.center));
@@ -93,42 +103,47 @@ public class signup_healthcare extends AppCompatActivity {
         Button btnSave = addcenter.findViewById(R.id.btn_save);
 
         btnSave.setOnClickListener(view -> {
-            AdministratorCenter administratorCenter = new AdministratorCenter();
-            administratorCenter.setCenterid(UUID.randomUUID().toString());
-            administratorCenter.setName(centername.getText().toString());
-            administratorCenter.setAddress(address.getText().toString());
+            String center = centername.getText().toString();
+            String addressCenter = address.getText().toString();
+            showDetails(center,addressCenter);
+            addcenter.dismiss();
+//            AdministratorCenter administratorCenter = new AdministratorCenter();
+//            administratorCenter.setCenterid(UUID.randomUUID().toString());
+//            administratorCenter.setName(centername.getText().toString());
+//            administratorCenter.setAddress(address.getText().toString());
 
 
-            db.collection("AdministratorCenter").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                    String flag = "not same";
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        if (document.getString("name").equals(centername.getText().toString())){
-                            flag = "same";
-                            break;
-                        }
-                    }
-                    if (flag.equals("not same")){
-                        db.collection(AdministratorCenter.COLLECTION_NAME)
-                                .document()
-                                .set(administratorCenter)
-                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void unused) {
-                                        signup_healthcare.AdministratorCenter = administratorCenter;
-                                        String center = centername.getText().toString();
-                                        String addressCenter = address.getText().toString();
-                                        showDetails(center,addressCenter);
-                                        addcenter.dismiss();
-                                    }
-                                });
-                    }
-                }
-            });
+//            db.collection("AdministratorCenter").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//                @Override
+//                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                    String flag = "not same";
+//                    for (QueryDocumentSnapshot document : task.getResult()) {
+//                        if (document.getString("name").equals(centername.getText().toString())){
+//                            flag = "same";
+//                            break;
+//                        }
+//                    }
+//                    if (flag.equals("not same")){
+//                        db.collection(AdministratorCenter.COLLECTION_NAME)
+//                                .document()
+//                                .set(administratorCenter)
+//                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                                    @Override
+//                                    public void onSuccess(Void unused) {
+//                                        signup_healthcare.AdministratorCenter = administratorCenter;
+//                                        String center = centername.getText().toString();
+//                                        String addressCenter = address.getText().toString();
+//                                        showDetails(center,addressCenter);
+//                                        addcenter.dismiss();
+//                                    }
+//                                });
+//                    }
+//                }
+//            });
         });
         addcenter.show();
     }
+
 
     private void showDetails(String center, String addressCenter) {
         center_view.setText(String.format(center));
