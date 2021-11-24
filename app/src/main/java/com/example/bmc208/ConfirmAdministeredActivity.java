@@ -64,6 +64,10 @@ public class ConfirmAdministeredActivity extends AppCompatActivity {
         administered = findViewById(R.id.administered_button);
 
         vaccineID.setText(selectedVaccine.vaccineID);
+        expiryDate.setText(selectedVaccine.appointmentDate);
+        remarks.setText(selectedVaccine.remarks);
+        vaccineName.setText(vaccine);
+
 
         String status = null;
         status = selectedVaccine.status;
