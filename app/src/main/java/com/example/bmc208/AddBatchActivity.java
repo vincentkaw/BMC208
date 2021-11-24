@@ -21,17 +21,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.DialogFragment;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.UUID;
 
-public class AddBatchActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
+public class AddBatchActivity extends AppCompatActivity {
     //Initialize variable
 
     DrawerLayout drawerLayout;
@@ -140,8 +138,9 @@ public class AddBatchActivity extends AppCompatActivity implements DatePickerDia
         calendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DialogFragment datePicker = new DatePickerFragment();
-                datePicker.show(getSupportFragmentManager(), "date picker");
+                //DialogFragment datePicker = new DatePickerFragment();
+                //datePicker.show(getSupportFragmentManager(), "date picker");
+                datePicker();
             }
         });
 
@@ -230,97 +229,24 @@ public class AddBatchActivity extends AppCompatActivity implements DatePickerDia
     }
 
 
-       /* addButton.setOnClickListener(new View.OnClickListener() {
+    private void datePicker(){
+        Calendar calendar = Calendar.getInstance();
+
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
-            public void onClick(View view) {
-                String batchNo = batchNoEditText.getText().toString();
-                String expiryDate = expiryDateTextView.getText().toString();
-                String quantity = quantityEditText.getText().toString();
-                batchData(batchNo ,expiryDate,quantity);
-                dialog.dismiss();
-
-                if (vaccineName.getText().toString().equals("Pfizer")){
-                    Pfizer_Batch batch = new Pfizer_Batch();
-                    batch.setPfizerID(UUID.randomUUID().toString());
-                    batch.setBatchID(batchNo);
-                    batch.setCenter("Test Center");
-                    batch.setDate(expiryDate);
-                    batch.setQuantity(quantity);
-
-                    db.collection(Pfizer_Batch.COLLECTION_NAME)
-                            .document()
-                            .set(batch)
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void unused) {
-                                    Toast.makeText(AddBatchActivity.this, "Batch Successfully added", Toast.LENGTH_SHORT).show();
-                                }
-                            }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(AddBatchActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }
-                else if (vaccineName.getText().toString().equals("Sinovac")){
-                    Sino_Batch batch = new Sino_Batch();
-                    batch.setSinoID(UUID.randomUUID().toString());
-                    batch.setBatchID(batchNo);
-                    batch.setCenter("Fake Center");
-                    batch.setDate(expiryDate);
-                    batch.setQuantity(quantity);
-
-                    db.collection(Sino_Batch.COLLECTION_NAME)
-                            .document()
-                            .set(batch)
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void unused) {
-                                    Toast.makeText(AddBatchActivity.this, "Batch Successfully added", Toast.LENGTH_SHORT).show();
-                                }
-                            }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(AddBatchActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }
-                else if (vaccineName.getText().toString().equals("AstraZeneca")){
-                    Astra_Batch batch = new Astra_Batch();
-                    batch.setAstraID(UUID.randomUUID().toString());
-                    batch.setBatchID(batchNo);
-                    batch.setCenter("Fake Center");
-                    batch.setDate(expiryDate);
-                    batch.setQuantity(quantity);
-
-                    db.collection(Astra_Batch.COLLECTION_NAME)
-                            .document()
-                            .set(batch)
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void unused) {
-                                    Toast.makeText(AddBatchActivity.this, "Batch Successfully added", Toast.LENGTH_SHORT).show();
-                                }
-                            }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(AddBatchActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }
-
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                String dateString = day + "/" + (month+1) + "/" + year;
+                expiryDateTextView.setText(dateString);
             }
-        });*/
+        }, year, month, day);
 
-    @Override
-    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        Calendar c = Calendar.getInstance();
-        c.set(Calendar.YEAR, year);
-        c.set(Calendar.MONTH, month);
-        c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-        String currentDateString = DateFormat.getDateInstance().format(c.getTime());
-
-        expiryDateTextView.setText(currentDateString);
+        long now = System.currentTimeMillis();
+        datePickerDialog.getDatePicker().setMinDate(now);
+        datePickerDialog.show();
     }
 
 

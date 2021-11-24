@@ -2,6 +2,7 @@ package com.example.bmc208;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -24,6 +26,10 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.UUID;
 
 public class AppointmentCalendar extends AppCompatActivity {
@@ -37,6 +43,7 @@ public class AppointmentCalendar extends AppCompatActivity {
     private int quantity;
     private String id;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +66,7 @@ public class AppointmentCalendar extends AppCompatActivity {
 
         if (vaccine.equals("PFIZER")){
             batch = "PFIZER_BATCH";
+
         }else if (vaccine.equals("SINO")){
             batch = "SINO_BATCH";
         }else if (vaccine.equals("ASTRA")){
@@ -74,14 +82,34 @@ public class AppointmentCalendar extends AppCompatActivity {
             startActivity(intent);
         }
 
+        Calendar calendar = Calendar.getInstance();
+        long now = System.currentTimeMillis() - 1000;
+        String date = selectedBatch.expiryStatus;
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        formatter.setLenient(false);
+
+        Date oldDate;
+        try {
+            oldDate = formatter.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            oldDate = new Date();
+        }
+        long milis = oldDate.getTime();
+        calendar.add(Calendar.MILLISECOND, (int) milis - 1300000000);
+
+        datePicker.setMinDate(now);
+        datePicker.setMaxDate(calendar.getTimeInMillis());
+
         setDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 int day=datePicker.getDayOfMonth();
                 int month = datePicker.getMonth() + 1;
                 int year = datePicker.getYear();
 
-                appointmentDate.setText("Appointment Date: " + day + "/" + month + "/" + year);
+                appointmentDate.setText(String.valueOf(milis));
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(AppointmentCalendar.this);
                 builder.setCancelable(true);

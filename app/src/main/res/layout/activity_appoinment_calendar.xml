@@ -36,6 +36,7 @@
         android:datePickerMode="calendar"
         android:layout_below="@id/batch_text_view"
         android:background="@color/white"
+        android:minDate=""
         android:layout_marginTop="10dp"/>
 
     <TextView
