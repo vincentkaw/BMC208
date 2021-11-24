@@ -22,9 +22,13 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.Calendar;
 import java.util.UUID;
@@ -147,7 +151,7 @@ public class AddBatchActivity extends AppCompatActivity {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addBatchLayout.setVisibility(View.INVISIBLE);
+                //addBatchLayout.setVisibility(View.INVISIBLE);
 
                 String batchNo = batchNoEditText.getText().toString();
                 String expiryDate = expiryDateTextView.getText().toString();
@@ -163,17 +167,34 @@ public class AddBatchActivity extends AppCompatActivity {
                     batch.setQuantity(quantity);
 
                     db.collection(Pfizer_Batch.COLLECTION_NAME)
-                            .document()
-                            .set(batch)
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void unused) {
-                                    Toast.makeText(AddBatchActivity.this, "Batch Successfully added", Toast.LENGTH_SHORT).show();
-                                }
-                            }).addOnFailureListener(new OnFailureListener() {
+                            .get()
+                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(AddBatchActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            String flag = "not same";
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                if (document.getString("batchID").equals(batchNoEditText.getText().toString())){
+                                    flag = "same";
+                                    Toast.makeText(AddBatchActivity.this, "This batch already exists", Toast.LENGTH_SHORT).show();
+                                    break;
+                                }
+                            }
+                            if (flag.equals("not same")){
+                                db.collection(Pfizer_Batch.COLLECTION_NAME)
+                                        .document()
+                                        .set(batch)
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void unused) {
+                                                Toast.makeText(AddBatchActivity.this, "Batch Successfully added", Toast.LENGTH_SHORT).show();
+                                            }
+                                        }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(AddBatchActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
                         }
                     });
                 }
@@ -186,19 +207,38 @@ public class AddBatchActivity extends AppCompatActivity {
                     batch.setQuantity(quantity);
 
                     db.collection(Sino_Batch.COLLECTION_NAME)
-                            .document()
-                            .set(batch)
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            .get()
+                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                 @Override
-                                public void onSuccess(Void unused) {
-                                    Toast.makeText(AddBatchActivity.this, "Batch Successfully added", Toast.LENGTH_SHORT).show();
+                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                    String flag = "not same";
+                                    for (QueryDocumentSnapshot document : task.getResult()) {
+                                        if (document.getString("batchID").equals(batchNoEditText.getText().toString())){
+                                            flag = "same";
+                                            Toast.makeText(AddBatchActivity.this, "This batch already exists", Toast.LENGTH_SHORT).show();
+                                            break;
+                                        }
+                                    }
+                                    if (flag.equals("not same")){
+                                        db.collection(Sino_Batch.COLLECTION_NAME)
+                                                .document()
+                                                .set(batch)
+                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void unused) {
+                                                        Toast.makeText(AddBatchActivity.this, "Batch Successfully added", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                }).addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Toast.makeText(AddBatchActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                                    }
                                 }
-                            }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(AddBatchActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                            });
+
+
                 }
                 else if (vaccineName.getText().toString().equals("AstraZeneca")){
                     Astra_Batch batch = new Astra_Batch();
@@ -209,19 +249,38 @@ public class AddBatchActivity extends AppCompatActivity {
                     batch.setQuantity(quantity);
 
                     db.collection(Astra_Batch.COLLECTION_NAME)
-                            .document()
-                            .set(batch)
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            .get()
+                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                 @Override
-                                public void onSuccess(Void unused) {
-                                    Toast.makeText(AddBatchActivity.this, "Batch Successfully added", Toast.LENGTH_SHORT).show();
+                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                    String flag = "not same";
+                                    for (QueryDocumentSnapshot document : task.getResult()) {
+                                        if (document.getString("batchID").equals(batchNoEditText.getText().toString())){
+                                            flag = "same";
+                                            Toast.makeText(AddBatchActivity.this, "This batch already exists", Toast.LENGTH_SHORT).show();
+                                            break;
+                                        }
+                                    }
+                                    if (flag.equals("not same")){
+                                        db.collection(Astra_Batch.COLLECTION_NAME)
+                                                .document()
+                                                .set(batch)
+                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void unused) {
+                                                        Toast.makeText(AddBatchActivity.this, "Batch Successfully added", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                }).addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Toast.makeText(AddBatchActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                                    }
                                 }
-                            }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(AddBatchActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                            });
+
+
                 }
             }
         });
