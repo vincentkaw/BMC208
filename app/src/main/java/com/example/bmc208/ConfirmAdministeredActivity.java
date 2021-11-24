@@ -37,6 +37,9 @@ public class ConfirmAdministeredActivity extends AppCompatActivity {
     Button confirm;
     Button administered;
     private String id;
+    private String email;
+    private String patientIC;
+    private String patientName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +52,7 @@ public class ConfirmAdministeredActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         String center = extras.getString("adminCenter");
         String vaccine = extras.getString("vaccine");
+        String batchId = extras.getString("batchID");
 
         vaccineID = findViewById(R.id.vaccine_id_text_view);
         batchID = findViewById(R.id.batch_id_text_view);
@@ -63,7 +67,43 @@ public class ConfirmAdministeredActivity extends AppCompatActivity {
         confirm = findViewById(R.id.confirm_button);
         administered = findViewById(R.id.administered_button);
 
+        CollectionReference getEmail = db.collection("Appointment");
+        Query emailGet = getEmail.whereEqualTo("vaccinationID", selectedVaccine.vaccineID);
+        emailGet.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        email = document.getString("email");
+                    }
+                    CollectionReference getPatient = db.collection("Patient");
+                    Query patientGet = getPatient.whereEqualTo("email", email);
+                    patientGet.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    patientName = document.getString("username");
+                                    patientIC = document.getString("ic_passport");
+                                }
+                                name.setText(patientName);
+                                ic.setText(patientIC);
+                            }
+                        }
+                    });
+                }
+            }
+        });
+
+
+
         vaccineID.setText(selectedVaccine.vaccineID);
+        expiryDate.setText(selectedVaccine.appointmentDate);
+        remarks.setText(selectedVaccine.remarks);
+        vaccineName.setText(vaccine);
+        batchID.setText(batchId.toString());
+
+
 
         String status = null;
         status = selectedVaccine.status;

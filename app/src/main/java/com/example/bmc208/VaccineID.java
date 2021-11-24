@@ -83,6 +83,7 @@ public class VaccineID extends AppCompatActivity {
                 intent.putExtra("Vaccine", vaccines.get(position));
                 intent.putExtra("adminCenter", center);
                 intent.putExtra("vaccine", vaccine);
+                intent.putExtra("batchID", selectedBatchID.batchID);
                 startActivity(intent);
 
 
