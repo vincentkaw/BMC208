@@ -46,7 +46,6 @@ public class signinAdministrator extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 db.collection(Administrator.COLLECTION_NAME)
                         .whereEqualTo("username", username.getText().toString())
                         .whereEqualTo("password", password.getText().toString())

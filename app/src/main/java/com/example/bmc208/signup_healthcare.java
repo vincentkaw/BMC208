@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,7 +23,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -44,10 +48,6 @@ public class signup_healthcare extends AppCompatActivity {
     TextView address_view;
     DatabaseReference dbref;
 
-    ValueEventListener listener;
-    ArrayList<String> list;
-    ArrayAdapter<String> adapter;
-
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     public static AdministratorCenter AdministratorCenter;
 
@@ -55,6 +55,10 @@ public class signup_healthcare extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup_healthcare);
+
+        ValueEventListener listener;
+        ArrayList<String> list = new ArrayList<String>();
+        ArrayAdapter<String> adapter;
 
         username = findViewById(R.id.enter_username);
         password = findViewById(R.id.enter_password);
@@ -70,13 +74,56 @@ public class signup_healthcare extends AppCompatActivity {
         spinner = findViewById(R.id.spinner_center);
         dbref = FirebaseDatabase.getInstance().getReference("name");
 
+        //spinner.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) this);
 
 
-//        ArrayAdapter<String> center_adapter = new ArrayAdapter<String>(signup_healthcare.this,
-//                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.center));
-//        center_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        spinner.setAdapter(center_adapter);
-        
+        db.collection("AdministratorCenter")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                list.add(document.getString("name"));
+                            }
+                            ArrayAdapter<String> center_adapter = new ArrayAdapter<String>(signup_healthcare.this, android.R.layout.simple_spinner_item, list);
+                            center_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            spinner.setAdapter(center_adapter);
+
+                            spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                @Override
+                                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                    String item = list.get(position);
+                                    center_view.setText(item);
+
+                                    CollectionReference deliveryRef = db.collection("AdministratorCenter");
+                                    Query nameQuery = deliveryRef.whereEqualTo("name",item);
+                                    nameQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                            if (task.isSuccessful()) {
+                                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                                    String id = document.getString("address");
+                                                    address_view.setText(id);
+                                                }
+                                            }
+                                        }
+                                    });
+                                }
+
+                                @Override
+                                public void onNothingSelected(AdapterView<?> parent) {
+
+                                }
+                            });
+
+                        }
+                    }
+                });
+
+
+
+
         textViewAddCenter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -198,7 +245,7 @@ public class signup_healthcare extends AppCompatActivity {
                                             public void onSuccess(Void unused) {
                                                 signinAdministrator.Administrator = administrator;
                                                 Toast.makeText(getApplicationContext(), "Data is valid", Toast.LENGTH_LONG).show();
-                                                startActivity(new Intent(signup_healthcare.this, signinPatient.class));
+                                                startActivity(new Intent(signup_healthcare.this, signinAdministrator.class));
                                             }
                                         })
                                         .addOnFailureListener(new OnFailureListener() {
