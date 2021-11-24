@@ -1,8 +1,5 @@
 package com.example.bmc208;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -13,6 +10,9 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -65,9 +65,9 @@ public class signinPatient extends AppCompatActivity {
                                     //break;
                                 }
 
-                                //if(Patient == null){
-                                  //  Toast.makeText(signinPatient.this, "Wrong username or password", Toast.LENGTH_LONG).show();
-                                //}
+                                if(Patient == null){
+                                    Toast.makeText(signinPatient.this, "Wrong username or password", Toast.LENGTH_LONG).show();
+                                }
                             }
 
                         });
