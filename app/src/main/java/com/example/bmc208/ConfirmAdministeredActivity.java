@@ -20,13 +20,10 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.security.PrivateKey;
-
 public class ConfirmAdministeredActivity extends AppCompatActivity {
 
     TextView batchID;
     TextView expiryDate;
-    TextView manufacturer;
     TextView vaccineName;
     TextView name;
     TextView vaccineID;
@@ -57,7 +54,6 @@ public class ConfirmAdministeredActivity extends AppCompatActivity {
         vaccineID = findViewById(R.id.vaccine_id_text_view);
         batchID = findViewById(R.id.batch_id_text_view);
         expiryDate = findViewById(R.id.expiry_date_text_view);
-        manufacturer = findViewById(R.id.manufacture_name_text_view);
         vaccineName = findViewById(R.id.vaccine_text_view);
         name = findViewById(R.id.name_text_view);
         ic = findViewById(R.id.ic_text_view);

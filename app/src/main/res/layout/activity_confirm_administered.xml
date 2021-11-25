@@ -74,32 +74,6 @@ android:orientation="vertical">
         app:layout_constraintTop_toBottomOf="@+id/batch_id_text_view"
         tools:ignore="MissingConstraints" />
 
-    <TextView
-        android:id="@+id/manufacture_name_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Manufacturer Name:"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/manufacture_text_view"
-        app:layout_constraintTop_toBottomOf="@+id/expiry_date_text_view"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/manufacture_text_view"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Manufacturer"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        app:layout_constraintLeft_toRightOf="@id/manufacture_name_text_view"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/expiry_date_text_view"
-        android:inputType="number"
-        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/vaccine_name_text_view"
@@ -111,7 +85,7 @@ android:orientation="vertical">
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/vaccine_text_view"
-        app:layout_constraintTop_toBottomOf="@+id/manufacture_name_text_view"
+        app:layout_constraintTop_toBottomOf="@+id/expiry_date_text_view"
         tools:ignore="MissingConstraints" />
 
     <TextView
@@ -124,7 +98,7 @@ android:orientation="vertical">
         android:textStyle="bold"
         app:layout_constraintLeft_toRightOf="@id/vaccine_name_text_view"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/manufacture_name_text_view"
+        app:layout_constraintTop_toBottomOf="@+id/expiry_date_text_view"
         android:inputType="number"
         tools:ignore="MissingConstraints" />
 
