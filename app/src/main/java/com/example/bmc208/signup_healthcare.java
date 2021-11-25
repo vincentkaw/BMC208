@@ -294,14 +294,14 @@ public class signup_healthcare extends AppCompatActivity {
             password.setError("Password minimum must have 6 charactors");
             return false;
         }
-        else if (!emails.matches("[a-zA-Z0-9._]+@[a-z]+\\.+[a-z]+")){
-            email.requestFocus();
-            email.setError("Enter valid error");
-            return false;
-        }
         else if (fulln.length()==0){
             fullname.requestFocus();
             fullname.setError("Fullname cannot be empty");
+            return false;
+        }
+        else if (!emails.matches("[a-zA-Z0-9._]+@[a-z]+\\.+[a-z]+")){
+            email.requestFocus();
+            email.setError("Enter valid email");
             return false;
         }
         else if (id.length()<5){

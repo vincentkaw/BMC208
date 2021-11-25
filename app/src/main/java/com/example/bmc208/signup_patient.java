@@ -53,7 +53,7 @@ public class signup_patient extends AppCompatActivity {
     public void SignUpButtonClick(View view) {
 
         String name = username.getText().toString();
-        String passwords = icPassword.getText().toString();
+        String passwords = password.getText().toString();
         String emails = email.getText().toString();
         String ic = icPassword.getText().toString();
         boolean check = validationinfo(name,passwords,emails,ic);
@@ -126,17 +126,17 @@ public class signup_patient extends AppCompatActivity {
         }
         else if (passwords.length()<=6){
             password.requestFocus();
-            password.setError("Password minimum must have 6 charactors");
+            password.setError("Password minimum must have 6 characters");
             return false;
         }
         else if (!emails.matches("[a-zA-Z0-9._]+@[a-z]+\\.+[a-z]+")){
             email.requestFocus();
-            email.setError("Enter valid error");
+            email.setError("Enter valid email");
             return false;
         }
         else if (ic.length()==0){
             icPassword.requestFocus();
-            icPassword.setError("Ic or Passport cannot be empty");
+            icPassword.setError("IC or Passport cannot be empty");
             return false;
         }
         else {
