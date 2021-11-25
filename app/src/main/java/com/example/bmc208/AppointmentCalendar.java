@@ -108,7 +108,7 @@ public class AppointmentCalendar extends AppCompatActivity {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(AppointmentCalendar.this);
                 builder.setCancelable(true);
-                builder.setMessage("The date u pick for " + batchNo.getText().toString() + " is " +  day + "/" + month + "/" + year );
+                builder.setMessage("The date you have selected for " + batchNo.getText().toString() + " is " +  day + "/" + month + "/" + year );
 
                 builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
@@ -191,7 +191,7 @@ public class AppointmentCalendar extends AppCompatActivity {
                                                                                     @Override
                                                                                     public void onComplete(@NonNull Task<Void> task) {
                                                                                         if (task.isSuccessful()){
-                                                                                            Toast.makeText(AppointmentCalendar.this, "Updated", Toast.LENGTH_SHORT).show();
+                                                                                            //Toast.makeText(AppointmentCalendar.this, "Updated", Toast.LENGTH_SHORT).show();
                                                                                         }else{
                                                                                             Toast.makeText(AppointmentCalendar.this, "Failed", Toast.LENGTH_SHORT).show();
                                                                                         }
