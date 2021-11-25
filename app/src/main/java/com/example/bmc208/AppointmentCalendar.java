@@ -26,10 +26,8 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.UUID;
 
 public class AppointmentCalendar extends AppCompatActivity {
@@ -88,15 +86,12 @@ public class AppointmentCalendar extends AppCompatActivity {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         formatter.setLenient(false);
 
-        Date oldDate;
-        try {
-            oldDate = formatter.parse(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-            oldDate = new Date();
-        }
-        long milis = oldDate.getTime();
-        calendar.add(Calendar.MILLISECOND, (int) milis - 1300000000);
+        String[] separated = date.split("/");
+        Integer year = Integer.parseInt(separated[2]);
+        Integer month = Integer.parseInt(separated[1]);
+        Integer day = Integer.parseInt(separated[0]);
+        calendar.set(year, (month - 1), day);
+
 
         datePicker.setMinDate(now);
         datePicker.setMaxDate(calendar.getTimeInMillis());
